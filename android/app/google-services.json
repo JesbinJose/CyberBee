@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "833660204691",
+    "project_id": "cyberbee-9984d",
+    "storage_bucket": "cyberbee-9984d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833660204691:android:b95b977455f26dcc9dff66",
+        "android_client_info": {
+          "package_name": "bee.opsec.cyber_bee"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9uYa9PvvCeB1GGF4tiaYebLr-R97Q1As"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
