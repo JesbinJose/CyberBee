@@ -16,11 +16,22 @@ class MyTextStyles {
     fontFamily: GoogleFonts.poppins().fontFamily,
   );
   static const TextStyle h3 = TextStyle();
-  static const TextStyle h4 = TextStyle();
+  static  TextStyle h4 = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: MyColors.textWhiteColor,
+    fontFamily: GoogleFonts.poppins().fontFamily,
+  );
   static TextStyle h5 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w600,
     color: MyColors.textGreyColor,
+    fontFamily: GoogleFonts.poppins().fontFamily,
+  );
+  static TextStyle h6 = TextStyle(
+    fontSize: 13,
+    fontWeight: FontWeight.w600,
+    color: MyColors.textWhiteColor,
     fontFamily: GoogleFonts.poppins().fontFamily,
   );
 }
