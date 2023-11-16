@@ -29,7 +29,6 @@ class MyLevel {
 enum PartType {
   video,
   pdf,
-  quiz,
 }
 
 class MyParts {
@@ -50,3 +49,32 @@ class VideoPart {
   final String description;
 }
 
+class Quiz {
+  Quiz({
+    required this.quizName,
+    required this.questions,
+    required this.totalMark,
+  });
+  final String quizName;
+  final List<Question> questions;
+  final int totalMark;
+}
+
+class Question {
+  Question({
+    required this.question,
+    required this.ans1,
+    required this.ans2,
+    required this.ans3,
+    required this.ans4,
+    required this.correctAns,
+    required this.mark,
+  });
+  final int mark;
+  final String question;
+  final String ans1;
+  final String ans2;
+  final String ans3;
+  final String ans4;
+  final int correctAns;
+}
