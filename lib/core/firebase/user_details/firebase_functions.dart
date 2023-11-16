@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cyber_bee/constants/random_data.dart';
 
 class FirebaseAuthFunctions {
-  static const String _docid = 'doc_id';
+  static const String _docid = 'user_id';
   static const String _password = 'password';
   static final FirebaseFirestore _instance = FirebaseFirestore.instance;
+
   static Future<bool> isUserNameAlreadyPresent(String username) async {
     return (await _instance.collection("usernames").get()).docs.any(
           (element) => element.id == username,
@@ -11,11 +13,12 @@ class FirebaseAuthFunctions {
   }
 
   //add user
-  Future<void> addUser({
+  static Future<void> addUser({
     required String username,
     required String docID,
     required String password,
   }) async {
+    await _instance.collection('users').doc(docID).set(SomeData.map(username));
     await _instance.collection('usernames').doc(username).set({
       _docid: docID,
       _password: password,
@@ -33,13 +36,12 @@ class FirebaseAuthFunctions {
   }
 
   static Future<String> getUserId(String username) async {
-    String userId = '';
     for (final QueryDocumentSnapshot<Map<String, dynamic>> e
         in (await _instance.collection("usernames").get()).docs) {
       if (e.id == username) {
-        userId = e[_docid];
+        return e[_docid];
       }
     }
-    return userId;
+    return '';
   }
 }

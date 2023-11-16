@@ -31,6 +31,11 @@ InputDecoration myFormFieldInputDecoration({
         color: MyColors.secondarybackgroundColor.withOpacity(0.6),
       ),
     ),
+    errorBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        color: MyColors.primaryRedColor.withOpacity(0.6),
+      ),
+    ),
     focusedBorder: const OutlineInputBorder(
       borderSide: BorderSide(
         color: MyColors.secondarybackgroundColor,

@@ -8,7 +8,7 @@ class AuthPhoneScreen extends StatelessWidget {
   AuthPhoneScreen({super.key});
 
   final TextEditingController _phoneNumberController = TextEditingController();
-
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,23 +26,33 @@ class AuthPhoneScreen extends StatelessWidget {
               height: 300,
             ),
             Form(
+              key: _formKey,
               child: Column(
                 children: [
                   TextFormField(
+                    style: MyTextStyles.h4,
                     controller: _phoneNumberController,
                     decoration: myFormFieldInputDecoration(
                       icon: CupertinoIcons.phone,
                       hintText: 'Phone number',
                     ),
+                    validator: (value) {
+                      if (value != null && value.length < 10) {
+                        return 'Please enter a valid number';
+                      }
+                      return null;
+                    },
                   ),
                   k30Height,
                   k30Height,
                   MyCustomButton(
                     function: () async {
-                      await MyFirebaseAuth.signInWithPhoneNumber(
-                        context,
-                        _phoneNumberController.text,
-                      );
+                      if (_formKey.currentState!.validate()) {
+                        await MyFirebaseAuth.signInWithPhoneNumber(
+                          context,
+                          _phoneNumberController.text,
+                        );
+                      }
                     },
                     text: 'Send OTP',
                   ),

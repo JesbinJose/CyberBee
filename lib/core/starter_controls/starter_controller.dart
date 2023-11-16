@@ -11,9 +11,9 @@ class StarterControl {
     }
   }
 
-  static Future<String?> isLoginin() async {
+  static Future<String> isLoginin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('username');
+    return prefs.getString('username')??"";
   }
 
   static Future<void> setAutoLogin(String username) async {

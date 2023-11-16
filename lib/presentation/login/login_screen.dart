@@ -1,4 +1,6 @@
 import 'package:cyber_bee/constants/constants.dart';
+import 'package:cyber_bee/domain/login_validation.dart';
+import 'package:cyber_bee/presentation/auth/phone_number/phone_number.dart';
 import 'package:cyber_bee/presentation/widgets/custom_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ class LoginScreen extends StatelessWidget {
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final ValueNotifier<bool> _saveLogin = ValueNotifier<bool>(false);
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,19 +20,28 @@ class LoginScreen extends StatelessWidget {
           horizontal: 20,
         ),
         child: Form(
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextFormField(
+                style: MyTextStyles.h4,
                 controller: _userNameController,
                 decoration: myFormFieldInputDecoration(
                   icon: CupertinoIcons.phone,
                   hintText: 'Username',
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Please enter username";
+                  }
+                  return null;
+                },
               ),
               k30Height,
               TextFormField(
+                style: MyTextStyles.h4,
                 controller: _passwordController,
                 decoration: myFormFieldInputDecoration(
                   icon: Icons.lock_person,
@@ -97,7 +109,12 @@ class LoginScreen extends StatelessWidget {
               k10Height,
               Center(
                 child: MyCustomButton(
-                  function: () {},
+                  function: () async => await ValidateLogin.validate(
+                    context: context,
+                    formKey: _formKey,
+                    username: _userNameController.text,
+                    password: _passwordController.text, isAutoLogin: _saveLogin.value,
+                  ),
                   text: 'Login',
                 ),
               ),
@@ -112,11 +129,17 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: () =>Navigator.pushNamed(context, 'auth'),
-                    child: Text(
-                      'register here', style: MyTextStyles.h2.copyWith(
-                      fontSize: 12,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AuthPhoneScreen(),
+                      ),
                     ),
+                    child: Text(
+                      'register here',
+                      style: MyTextStyles.h2.copyWith(
+                        fontSize: 12,
+                      ),
                     ),
                   ),
                 ],

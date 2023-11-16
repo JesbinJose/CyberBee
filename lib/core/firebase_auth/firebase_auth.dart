@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cyber_bee/presentation/auth/otp/otp.dart';
 import 'package:cyber_bee/presentation/widgets/show_snakbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class MyFirebaseAuth {
   final firebaseFirestore = FirebaseFirestore.instance.collection('');
@@ -17,12 +18,17 @@ class MyFirebaseAuth {
       verificationFailed: (FirebaseAuthException e) {},
       codeSent: (String verificationId, int? resendToken) async {
         _verificationId = verificationId;
-        await Navigator.pushReplacementNamed(context, 'otp');
+        await Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OtpScreen(),
+          ),
+        );
       },
       codeAutoRetrievalTimeout: (String verificationId) async {
         await Future.delayed(
           const Duration(
-            seconds: 30,
+            minutes: 5,
           ),
         );
       },

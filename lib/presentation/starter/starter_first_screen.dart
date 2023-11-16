@@ -1,6 +1,7 @@
 import 'package:cyber_bee/constants/assets_image.dart';
 import 'package:cyber_bee/constants/my_colors.dart';
 import 'package:cyber_bee/constants/widgets.dart';
+import 'package:cyber_bee/core/starter_controls/starter_controller.dart';
 import 'package:cyber_bee/presentation/login/login_screen.dart';
 import 'package:cyber_bee/presentation/widgets/custom_button.dart';
 import 'package:cyber_bee/presentation/starter/widgets/custom_slider.dart';
@@ -51,10 +52,12 @@ class _StarterFirstScreenState extends State<StarterFirstScreen> {
                       _counter = 1;
                       setState(() {});
                     } else {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginScreen(),
+                      StarterControl.isStarterPresented().then(
+                        (value) => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ),
                         ),
                       );
                     }
@@ -63,10 +66,12 @@ class _StarterFirstScreenState extends State<StarterFirstScreen> {
                 ),
                 MyCustomButton(
                   function: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
+                    StarterControl.isStarterPresented().then(
+                      (value) => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginScreen(),
+                        ),
                       ),
                     );
                   },

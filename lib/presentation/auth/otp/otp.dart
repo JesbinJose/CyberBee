@@ -1,6 +1,7 @@
-import 'package:cyber_bee/application/auth/timer.dart';
+import 'package:cyber_bee/domain/auth/timer.dart';
 import 'package:cyber_bee/constants/constants.dart';
 import 'package:cyber_bee/core/firebase_auth/firebase_auth.dart';
+import 'package:cyber_bee/presentation/auth/sign_up/sign_up.dart';
 import 'package:cyber_bee/presentation/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
@@ -74,9 +75,13 @@ class OtpScreen extends StatelessWidget {
                                         context: context)
                                     .then((value) {
                               if (value.isNotEmpty) {
-                                Navigator.pushReplacementNamed(
+                                Navigator.pushReplacement(
                                   context,
-                                  'sign_up',
+                                  MaterialPageRoute(
+                                    builder: (context) => SignUPScreen(
+                                      userId: value,
+                                    ),
+                                  ),
                                 );
                               }
                             }),
