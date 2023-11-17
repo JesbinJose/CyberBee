@@ -2,18 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cyber_bee/core/firebase/courses/course_models.dart';
 
 class GetAllCourseDetails {
-  final CollectionReference _instance =
+  static final CollectionReference _instance =
       FirebaseFirestore.instance.collection('courses');
 
-  Stream getRecomaendedCourse() {
+  static Stream<QuerySnapshot> getRecomaendedCourse() {
     return _instance.snapshots();
   }
 
-  Stream getCourses() {
+  static Stream<QuerySnapshot> getCourses() {
     return _instance.snapshots();
   }
 
-  Future<void> addCourse(MyCourse course) async {
+  static Future<void> addCourse(MyCourse course) async {
     Map<String, dynamic> data = {
       'description': course.description,
       'amount': course.amount,
@@ -24,9 +24,9 @@ class GetAllCourseDetails {
     _instance.doc(course.courseName).set(data);
   }
 
-  Future<void> addLevel(MyLevel level) async {
+  static Future<void> addLevel(MyLevel level) async {
     _instance.doc(level.courseName).collection(level.levelName);
   }
 
-  Future<void> addPartsInLevel(String courseName, String levelName,)async {}
+  static Future<void> addPartsInLevel(String courseName, String levelName,)async {}
 }

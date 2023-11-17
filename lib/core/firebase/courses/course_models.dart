@@ -1,5 +1,5 @@
 class MyCourse {
-  MyCourse({
+  MyCourse(this.introImageLink, {
     required this.courseName,
     required this.description,
     required this.amount,
@@ -8,6 +8,7 @@ class MyCourse {
     required this.levelsNumber,
   });
   final String courseName;
+  final String introImageLink;
   final String description;
   final int amount;
   final int discount;
@@ -70,11 +71,11 @@ class Question {
     required this.correctAns,
     required this.mark,
   });
-  final int mark;
   final String question;
   final String ans1;
   final String ans2;
   final String ans3;
   final String ans4;
   final int correctAns;
+  final int mark;
 }
