@@ -1,58 +1,54 @@
 import 'package:cyber_bee/constants/constants.dart';
-import 'package:cyber_bee/presentation/course/course.dart';
-import 'package:cyber_bee/presentation/home/home.dart';
-import 'package:cyber_bee/presentation/profile/profile.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+class MainScreen extends StatelessWidget {
+  MainScreen({super.key, required this.screens});
 
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 0;
-  List<Widget> screens = [
-    const ScreenHome(),
-    const CourseScreen(),
-    const ProfileScreen(),
-  ];
+  final ValueNotifier<int> _currentIndex = ValueNotifier<int>(0);
+  final List<Widget> screens;
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.sizeOf(context);
     return Scaffold(
-      backgroundColor: MyColors.backgroundBlackColor,
-      body: Stack(
-        children: [
-          SizedBox(
-            height: MediaQuery.sizeOf(context).height,
-            width: MediaQuery.sizeOf(context).width,
-            child: screens[_currentIndex],
+      body: SizedBox(
+        height: size.height,
+        width: size.width,
+        child: ValueListenableBuilder<int>(
+          valueListenable: _currentIndex,
+          builder: (_, __, ___) {
+            return screens[_currentIndex.value];
+          },
+        ),
+      ),
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.fromLTRB(40, 0, 40, 40),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        height: 60,
+        decoration: const BoxDecoration(
+          color: MyColors.secondarybackgroundColor,
+          borderRadius: BorderRadius.all(
+            Radius.circular(20.0),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              margin: const EdgeInsets.fromLTRB(40, 0, 40, 40),
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              height: 60,
-              decoration: const BoxDecoration(
-                color: MyColors.secondarybackgroundColor,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20.0),
-                ),
-              ),
-              width: MediaQuery.sizeOf(context).width * 90,
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(20.0),
-                ),
-                child: BottomNavigationBar(
-                  currentIndex: _currentIndex,
+        ),
+        width: size.width * 90,
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(20.0),
+          ),
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              splashFactory: NoSplash.splashFactory,
+            ),
+            child: ValueListenableBuilder(
+              valueListenable: _currentIndex,
+              builder: (_, __, ___) {
+                return BottomNavigationBar(
+                  type: BottomNavigationBarType.fixed,
+                  selectedItemColor: MyColors.primaryRedColor,
+                  currentIndex: _currentIndex.value,
                   onTap: (value) {
-                    setState(() {
-                      _currentIndex = value;
-                    });
+                    _currentIndex.value = value;
                   },
                   showSelectedLabels: false,
                   showUnselectedLabels: false,
@@ -60,30 +56,30 @@ class _MainScreenState extends State<MainScreen> {
                     BottomNavigationBarItem(
                       icon: FaIcon(
                         FontAwesomeIcons.house,
-                        size: 19,
+                        size: 20,
                       ),
                       label: 'Home',
                     ),
                     BottomNavigationBarItem(
                       icon: FaIcon(
                         FontAwesomeIcons.book,
-                        size: 19,
+                        size: 20,
                       ),
                       label: 'Course',
                     ),
                     BottomNavigationBarItem(
                       icon: FaIcon(
                         FontAwesomeIcons.userTie,
-                        size: 19,
+                        size: 20,
                       ),
                       label: 'profile',
                     ),
                   ],
-                ),
-              ),
+                );
+              },
             ),
-          )
-        ],
+          ),
+        ),
       ),
     );
   }

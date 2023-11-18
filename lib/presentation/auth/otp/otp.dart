@@ -14,7 +14,6 @@ class OtpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.backgroundBlackColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -75,6 +74,7 @@ class OtpScreen extends StatelessWidget {
                                         context: context)
                                     .then((value) {
                               if (value.isNotEmpty) {
+                                _oTPcontroller.dispose();
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(

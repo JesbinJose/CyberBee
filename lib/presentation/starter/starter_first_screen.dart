@@ -1,5 +1,4 @@
 import 'package:cyber_bee/constants/assets_image.dart';
-import 'package:cyber_bee/constants/my_colors.dart';
 import 'package:cyber_bee/constants/widgets.dart';
 import 'package:cyber_bee/core/starter_controls/starter_controller.dart';
 import 'package:cyber_bee/presentation/login/login_screen.dart';
@@ -20,7 +19,6 @@ class _StarterFirstScreenState extends State<StarterFirstScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.backgroundBlackColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(

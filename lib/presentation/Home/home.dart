@@ -1,6 +1,9 @@
 import 'package:cyber_bee/constants/constants.dart';
+import 'package:cyber_bee/presentation/home/widgets/event_carosal.dart';
+import 'package:cyber_bee/presentation/home/widgets/my_search_bar.dart';
+import 'package:cyber_bee/presentation/home/widgets/recommended_home.dart';
 import 'package:cyber_bee/presentation/home/widgets/top_details.dart';
-import 'package:cyber_bee/presentation/search/search.dart';
+import 'package:cyber_bee/presentation/widgets/custom_title_text.dart';
 import 'package:flutter/material.dart';
 
 class ScreenHome extends StatelessWidget {
@@ -10,17 +13,25 @@ class ScreenHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: MyColors.backgroundBlackColor,
         body: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          height: MediaQuery.sizeOf(context).height,
+          height: double.infinity,
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                k10Height,
                 const HomeTopDetails(),
-                SearchBar(
-                  onTap: ()=>showSearch(context: context, delegate: Search(),),
-                ),
+                k30Height,
+                k10Height,
+                const MySearchBar(),
+                k10Height,
+                const CustomTitleTextWidget(title: 'Recommended',),
+                const RecommendedHome(),
+                const CustomTitleTextWidget(title: 'Events',),
+                k10Height,
+                HomeEventCarosal(),
               ],
             ),
           ),
@@ -29,5 +40,3 @@ class ScreenHome extends StatelessWidget {
     );
   }
 }
-
-

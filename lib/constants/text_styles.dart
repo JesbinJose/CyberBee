@@ -15,8 +15,13 @@ class MyTextStyles {
     color: MyColors.textRedColor,
     fontFamily: GoogleFonts.poppins().fontFamily,
   );
-  static const TextStyle h3 = TextStyle();
-  static  TextStyle h4 = TextStyle(
+  static TextStyle h3 = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: MyColors.textWhiteColor,
+    fontFamily: GoogleFonts.poppins().fontFamily,
+  );
+  static TextStyle h4 = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
     color: MyColors.textWhiteColor,

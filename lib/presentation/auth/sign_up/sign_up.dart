@@ -22,7 +22,6 @@ class SignUPScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.backgroundBlackColor,
       body: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: SizedBox(
@@ -106,14 +105,17 @@ class SignUPScreen extends StatelessWidget {
                                 username: _username.text,
                                 docID: userId,
                                 password: _password.text,
-                              ).then(
-                                (value) => Navigator.pushReplacement(
+                              ).then((value) {
+                                _password.dispose();
+                                _passwordTwice.dispose();
+                                _username.dispose();
+                                Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => LoginScreen(),
+                                    builder: (context) => const LoginScreen(),
                                   ),
-                                ),
-                              );
+                                );
+                              });
                             }
                           }
                         },

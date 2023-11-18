@@ -1,11 +1,12 @@
 import 'package:cyber_bee/core/firebase/user_details/user_details.dart';
 import 'package:cyber_bee/core/starter_controls/starter_controller.dart';
+import 'package:cyber_bee/presentation/course/course.dart';
+import 'package:cyber_bee/presentation/home/home.dart';
 import 'package:cyber_bee/presentation/login/login_screen.dart';
 import 'package:cyber_bee/presentation/main/main_screen.dart';
+import 'package:cyber_bee/presentation/profile/profile.dart';
 import 'package:cyber_bee/presentation/starter/starter_first_screen.dart';
 import 'package:flutter/material.dart';
-
-import '../../constants/my_colors.dart';
 
 enum Screen {
   home,
@@ -42,8 +43,14 @@ class SplashScreen extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) {
                     return screen == Screen.home
-                        ? const MainScreen()
-                        : LoginScreen();
+                        ? MainScreen(
+                            screens: const [
+                              ScreenHome(),
+                              CourseScreen(),
+                              ProfileScreen(),
+                            ],
+                          )
+                        : const LoginScreen();
                   },
                 ),
               );
@@ -53,8 +60,6 @@ class SplashScreen extends StatelessWidget {
       },
     );
 
-    return const Scaffold(
-      backgroundColor: MyColors.backgroundBlackColor,
-    );
+    return const Scaffold();
   }
 }

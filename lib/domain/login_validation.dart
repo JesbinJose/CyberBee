@@ -1,9 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:cyber_bee/core/firebase/user_details/firebase_functions.dart';
 import 'package:cyber_bee/core/firebase/user_details/user_details.dart';
 import 'package:cyber_bee/core/starter_controls/starter_controller.dart';
+import 'package:cyber_bee/presentation/course/course.dart';
+import 'package:cyber_bee/presentation/home/home.dart';
 import 'package:cyber_bee/presentation/main/main_screen.dart';
+import 'package:cyber_bee/presentation/profile/profile.dart';
 import 'package:cyber_bee/presentation/widgets/show_snakbar.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +35,13 @@ class ValidateLogin {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const MainScreen(),
+              builder: (context) => MainScreen(
+                screens: const [
+                  ScreenHome(),
+                  CourseScreen(),
+                  ProfileScreen(),
+                ],
+              ),
             ),
           );
         }

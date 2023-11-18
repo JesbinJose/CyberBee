@@ -1,3 +1,4 @@
+import 'package:cyber_bee/constants/constants.dart';
 import 'package:cyber_bee/core/firebase/options/firebase_options.dart';
 import 'package:cyber_bee/presentation/splash/spash.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -9,8 +10,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.web);
   await FirebaseAppCheck.instance.activate(
       androidProvider: AndroidProvider.playIntegrity,
-      appleProvider: AppleProvider.debug
-  );
+      appleProvider: AppleProvider.debug);
   runApp(const MyApp());
 }
 
@@ -19,9 +19,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(
+        scaffoldBackgroundColor: MyColors.backgroundBlackColor,
+      ),
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }

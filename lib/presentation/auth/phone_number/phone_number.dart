@@ -12,7 +12,6 @@ class AuthPhoneScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.backgroundBlackColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
@@ -51,7 +50,9 @@ class AuthPhoneScreen extends StatelessWidget {
                         await MyFirebaseAuth.signInWithPhoneNumber(
                           context,
                           _phoneNumberController.text,
-                        );
+                        ).then((value) {
+                          if (value) _phoneNumberController.dispose();
+                        });
                       }
                     },
                     text: 'Send OTP',

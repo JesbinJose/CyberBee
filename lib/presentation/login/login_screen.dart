@@ -5,16 +5,25 @@ import 'package:cyber_bee/presentation/widgets/custom_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _userNameController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
+
   final ValueNotifier<bool> _saveLogin = ValueNotifier<bool>(false);
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.backgroundBlackColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
@@ -113,7 +122,8 @@ class LoginScreen extends StatelessWidget {
                     context: context,
                     formKey: _formKey,
                     username: _userNameController.text,
-                    password: _passwordController.text, isAutoLogin: _saveLogin.value,
+                    password: _passwordController.text,
+                    isAutoLogin: _saveLogin.value,
                   ),
                   text: 'Login',
                 ),
@@ -149,5 +159,13 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _userNameController.dispose();
+    _saveLogin.dispose();
+    super.dispose();
   }
 }

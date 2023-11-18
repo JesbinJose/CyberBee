@@ -6,10 +6,11 @@ import 'package:flutter/material.dart';
 class MyFirebaseAuth {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
   static String _verificationId = '';
-  static Future<void> signInWithPhoneNumber(
+  static Future<bool> signInWithPhoneNumber(
     BuildContext context,
     String phoneNumber,
   ) async {
+    bool isVerificationOK = false;
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) async {
@@ -18,6 +19,7 @@ class MyFirebaseAuth {
       verificationFailed: (FirebaseAuthException e) {},
       codeSent: (String verificationId, int? resendToken) async {
         _verificationId = verificationId;
+        isVerificationOK = true;
         await Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -33,6 +35,7 @@ class MyFirebaseAuth {
         );
       },
     );
+    return isVerificationOK;
   }
 
   static Future<String> verifyOTP(
