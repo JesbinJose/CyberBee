@@ -34,7 +34,7 @@ class ScreenHome extends StatelessWidget {
                 HomeEventCarosal(),
               ],
             ),
-          ),
+          )
         ),
       ),
     );
