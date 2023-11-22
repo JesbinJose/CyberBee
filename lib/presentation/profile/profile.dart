@@ -114,16 +114,6 @@ class ProfileScreen extends StatelessWidget {
                       return const SizedBox.shrink();
                     },
                   ),
-                ListTile(
-                  leading: const FaIcon(
-                    FontAwesomeIcons.userTie,
-                    color: MyColors.textWhiteColor,
-                  ),
-                  title: Text(
-                    'Account settings',
-                    style: MyTextStyles.h3,
-                  ),
-                ),
               ],
             ),
           ),

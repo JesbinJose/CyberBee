@@ -1,6 +1,6 @@
 import 'package:cyber_bee/constants/constants.dart';
 import 'package:cyber_bee/domain/login_validation.dart';
-import 'package:cyber_bee/presentation/auth/phone_number/phone_number.dart';
+import 'package:cyber_bee/presentation/auth/login/widgets/register_account_button.dart';
 import 'package:cyber_bee/presentation/widgets/custom_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +35,9 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextFormField(
+                onChanged: (value) {
+                  _formKey.currentState!.validate();
+                },
                 style: MyTextStyles.h4,
                 controller: _userNameController,
                 decoration: myFormFieldInputDecoration(
@@ -129,31 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               k30Height,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Don’t have an account ? ',
-                    style: MyTextStyles.h6.copyWith(
-                      fontSize: 12,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AuthPhoneScreen(),
-                      ),
-                    ),
-                    child: Text(
-                      'register here',
-                      style: MyTextStyles.h2.copyWith(
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                ],
-              )
+              const RegisterAccount()
             ],
           ),
         ),

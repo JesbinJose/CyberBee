@@ -1,8 +1,8 @@
 import 'package:cyber_bee/core/firebase/user_details/user_details.dart';
 import 'package:cyber_bee/core/starter_controls/starter_controller.dart';
-import 'package:cyber_bee/presentation/course/course.dart';
-import 'package:cyber_bee/presentation/home/home.dart';
-import 'package:cyber_bee/presentation/login/login_screen.dart';
+import 'package:cyber_bee/presentation/user/course/course.dart';
+import 'package:cyber_bee/presentation/user/home/home.dart';
+import 'package:cyber_bee/presentation/auth/login/login_screen.dart';
 import 'package:cyber_bee/presentation/main/main_screen.dart';
 import 'package:cyber_bee/presentation/profile/profile.dart';
 import 'package:cyber_bee/presentation/starter/starter_first_screen.dart';

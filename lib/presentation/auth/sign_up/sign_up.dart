@@ -1,8 +1,6 @@
 import 'package:cyber_bee/constants/constants.dart';
-import 'package:cyber_bee/core/firebase/user_details/firebase_functions.dart';
-import 'package:cyber_bee/presentation/login/login_screen.dart';
-import 'package:cyber_bee/presentation/widgets/custom_button.dart';
-import 'package:cyber_bee/presentation/widgets/show_snakbar.dart';
+import 'package:cyber_bee/presentation/auth/sign_up/widgets/custom_text_field.dart';
+import 'package:cyber_bee/presentation/auth/sign_up/widgets/validate_button.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +42,9 @@ class SignUPScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       TextFormField(
+                        onChanged: (value) {
+                          _formKey.currentState!.validate();
+                        },
                         style: MyTextStyles.h4,
                         controller: _username,
                         decoration: myFormFieldInputDecoration(
@@ -58,14 +59,12 @@ class SignUPScreen extends StatelessWidget {
                         },
                       ),
                       k30Height,
-                      TextFormField(
-                        style: MyTextStyles.h4,
-                        controller: _password,
-                        decoration: myFormFieldInputDecoration(
-                          icon: Icons.lock_person,
-                          hintText: 'Password',
-                        ),
-                        validator: (value) {
+                      CustomTextFromField(
+                        passwordTwice: _passwordTwice,
+                        formKey: _formKey,
+                        password: _password,
+                        hintText: 'Password',
+                        function: (value) {
                           if (value == null || value.length < 5) {
                             return "Enter at least 6 characters for password";
                           } else if (value != _passwordTwice.text) {
@@ -73,53 +72,30 @@ class SignUPScreen extends StatelessWidget {
                           }
                           return null;
                         },
+                        icon: Icons.lock_person,
                       ),
                       k30Height,
-                      TextFormField(
-                        style: MyTextStyles.h4,
-                        controller: _passwordTwice,
-                        decoration: myFormFieldInputDecoration(
-                          icon: Icons.lock_person,
-                          hintText: 'Confirm Password',
-                        ),
-                        validator: (value) {
+                      CustomTextFromField(
+                        passwordTwice: _passwordTwice,
+                        formKey: _formKey,
+                        password: _password,
+                        hintText: 'Confirm Password',
+                        function: (value) {
                           if (value != _password.text) {
                             return 'Enter same password';
                           }
                           return null;
                         },
+                        icon: Icons.lock_person,
                       ),
                       k30Height,
                       k30Height,
-                      MyCustomButton(
-                        function: () async {
-                          if (_formKey.currentState!.validate()) {
-                            if (await FirebaseAuthFunctions
-                                .isUserNameAlreadyPresent(
-                              _username.text,
-                            )) {
-                              // ignore: use_build_context_synchronously
-                              mySnakbar(context, 'Username is already taken');
-                            } else {
-                              await FirebaseAuthFunctions.addUser(
-                                username: _username.text,
-                                docID: userId,
-                                password: _password.text,
-                              ).then((value) {
-                                _password.dispose();
-                                _passwordTwice.dispose();
-                                _username.dispose();
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const LoginScreen(),
-                                  ),
-                                );
-                              });
-                            }
-                          }
-                        },
-                        text: 'Sign Up',
+                      ValidateButton(
+                        formKey: _formKey,
+                        username: _username,
+                        userId: userId,
+                        password: _password,
+                        passwordTwice: _passwordTwice,
                       ),
                     ],
                   ),

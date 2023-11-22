@@ -22,6 +22,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: MyColors.backgroundBlackColor,
+        appBarTheme: AppBarTheme(
+          backgroundColor: MyColors.backgroundBlackColor,
+          elevation: 0,
+          titleTextStyle: MyTextStyles.h1,
+          iconTheme: const IconThemeData(
+            color: MyColors.iconSecondarywhiteColor,
+          ),
+        ),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.red,
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),

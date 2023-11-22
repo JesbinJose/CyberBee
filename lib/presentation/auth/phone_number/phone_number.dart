@@ -29,6 +29,9 @@ class AuthPhoneScreen extends StatelessWidget {
               child: Column(
                 children: [
                   TextFormField(
+                    onChanged: (value) {
+                      _formKey.currentState!.validate();
+                    },
                     style: MyTextStyles.h4,
                     controller: _phoneNumberController,
                     decoration: myFormFieldInputDecoration(
@@ -36,7 +39,7 @@ class AuthPhoneScreen extends StatelessWidget {
                       hintText: 'Phone number',
                     ),
                     validator: (value) {
-                      if (value != null && value.length < 10) {
+                      if (value != null && value.length < 6) {
                         return 'Please enter a valid number';
                       }
                       return null;

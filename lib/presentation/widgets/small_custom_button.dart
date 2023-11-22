@@ -2,16 +2,13 @@ import 'package:cyber_bee/constants/my_colors.dart';
 import 'package:cyber_bee/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
-class MyCustomButton extends StatelessWidget {
+class MyCustomSmallButton extends StatelessWidget {
+  final String content;
   final VoidCallback function;
-  final String text;
-  final Color? color;
-
-  const MyCustomButton({
+  const MyCustomSmallButton({
     super.key,
-    this.color,
+    required this.content,
     required this.function,
-    required this.text,
   });
 
   @override
@@ -20,18 +17,20 @@ class MyCustomButton extends StatelessWidget {
       onTap: function,
       child: Container(
         padding: const EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 20,
+          vertical: 1,
+          horizontal: 10,
         ),
-        decoration: BoxDecoration(
-          color: color ?? MyColors.primaryRedColor,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(4),
+        decoration: const BoxDecoration(
+          color: MyColors.primaryRedColor,
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
           ),
         ),
         child: Text(
-          text,
-          style: MyTextStyles.h4,
+          content,
+          style: MyTextStyles.h5.copyWith(
+            color: MyColors.textWhiteColor,
+          ),
         ),
       ),
     );

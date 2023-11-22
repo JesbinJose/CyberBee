@@ -1,6 +1,6 @@
 import 'package:cyber_bee/constants/constants.dart';
 import 'package:cyber_bee/core/firebase/user_details/user_details.dart';
-import 'package:cyber_bee/presentation/course/widgets/custom_progress_indicator.dart';
+import 'package:cyber_bee/presentation/user/course/widgets/custom_progress_indicator.dart';
 import 'package:flutter/material.dart';
 
 class CourseProgressContainerWidget extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:cyber_bee/constants/assets_image.dart';
 import 'package:cyber_bee/constants/widgets.dart';
 import 'package:cyber_bee/core/starter_controls/starter_controller.dart';
-import 'package:cyber_bee/presentation/login/login_screen.dart';
+import 'package:cyber_bee/presentation/auth/login/login_screen.dart';
 import 'package:cyber_bee/presentation/widgets/custom_button.dart';
 import 'package:cyber_bee/presentation/starter/widgets/custom_slider.dart';
 import 'package:flutter/material.dart';

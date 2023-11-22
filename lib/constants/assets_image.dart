@@ -7,4 +7,5 @@ class MyAssetsImages {
 
 class MyAssetsLottie {
   static const String redTick = 'assets/lottie/sign_up/red_tick.json';
+  static const String loadingList = 'assets/lottie/loding/loading.json';
 }

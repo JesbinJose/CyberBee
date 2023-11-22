@@ -1,8 +1,8 @@
 import 'package:cyber_bee/constants/constants.dart';
-import 'package:cyber_bee/presentation/home/widgets/event_carosal.dart';
-import 'package:cyber_bee/presentation/home/widgets/my_search_bar.dart';
-import 'package:cyber_bee/presentation/home/widgets/recommended_home.dart';
-import 'package:cyber_bee/presentation/home/widgets/top_details.dart';
+import 'package:cyber_bee/presentation/user/home/widgets/event_carosal.dart';
+import 'package:cyber_bee/presentation/user/home/widgets/my_search_bar.dart';
+import 'package:cyber_bee/presentation/user/home/widgets/recommended_home.dart';
+import 'package:cyber_bee/presentation/user/home/widgets/top_details.dart';
 import 'package:cyber_bee/presentation/widgets/custom_title_text.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,6 @@ class ScreenHome extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           height: double.infinity,
           child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
