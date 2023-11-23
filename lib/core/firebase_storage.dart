@@ -19,4 +19,19 @@ class FireBaseStorage {
     }
     return null;
   }
+  static Future<String?> uploadEventImageToFirebaseStorage(
+    final context, {
+    required File file,
+  }) async {
+    try {
+      final storageRef =
+          FirebaseStorage.instance.ref().child('profile_pics/${DateTime.now().microsecondsSinceEpoch}.jpg');
+      final metadata = SettableMetadata(contentType: 'image/png');
+      await storageRef.putData(file.readAsBytesSync(), metadata);
+      return await storageRef.getDownloadURL();
+    } catch (e) {
+      mySnakbar(context, e.toString());
+    }
+    return null;
+  }
 }

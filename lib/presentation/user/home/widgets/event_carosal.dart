@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cyber_bee/constants/constants.dart';
 import 'package:cyber_bee/core/firebase/events/events.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeEventCarosal extends StatelessWidget {
   HomeEventCarosal({
@@ -33,28 +35,32 @@ class HomeEventCarosal extends StatelessWidget {
                 child: CarouselSlider.builder(
                   itemCount: showEventsNumber,
                   itemBuilder: (context, index, realIndex) {
-                    return Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                      ),
-                      height: 100,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            10,
-                          ),
+                    final QueryDocumentSnapshot event =
+                        snapshot.data!.docs[index];
+                    return InkWell(
+                      onTap: () => launchUrl(
+                        Uri.parse(
+                          event['link'],
                         ),
-                        color: Colors.amber,
                       ),
-                      child: Center(
-                        child: Text(
-                          '$index,$realIndex',
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                        ),
+                        width: double.infinity,
+                        height: 100,
+                        child: ClipRRect(
+                          borderRadius: circleRad(20),
+                          child: Image.network(
+                            event['image'],
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     );
                   },
                   options: CarouselOptions(
-                    autoPlayInterval:const  Duration(
+                    autoPlayInterval: const Duration(
                       seconds: 6,
                     ),
                     onPageChanged: (index, reason) {

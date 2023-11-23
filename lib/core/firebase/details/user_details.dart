@@ -4,11 +4,34 @@ class UserDetailsForAdmin {
   static final FirebaseFirestore _instance = FirebaseFirestore.instance;
   static final CollectionReference<Map<String, dynamic>> _user =
       _instance.collection('users');
+      
   static Future<List<QueryDocumentSnapshot<Object?>>> getAllStudents() async {
     final QuerySnapshot users = await _user.get();
     List<QueryDocumentSnapshot<Object?>> list = [];
     for (var user in users.docs) {
-      if (!user['isAdmin']) {
+      if (!user['isAdmin']&&!user['isTutor']) {
+        list.add(user);
+      }
+    }
+    return list;
+  }
+
+  static Future<List<QueryDocumentSnapshot<Object?>>> getAllAdmin() async {
+    final QuerySnapshot users = await _user.get();
+    List<QueryDocumentSnapshot<Object?>> list = [];
+    for (var user in users.docs) {
+      if (user['isAdmin']) {
+        list.add(user);
+      }
+    }
+    return list;
+  }
+  
+  static Future<List<QueryDocumentSnapshot<Object?>>> getAllTutor() async {
+    final QuerySnapshot users = await _user.get();
+    List<QueryDocumentSnapshot<Object?>> list = [];
+    for (var user in users.docs) {
+      if (user['isTutor']) {
         list.add(user);
       }
     }
