@@ -5,6 +5,7 @@ import 'package:cyber_bee/presentation/admin/home/admin_home.dart';
 import 'package:cyber_bee/presentation/main/main_screen.dart';
 import 'package:cyber_bee/presentation/profile/screens/account_settings.dart';
 import 'package:cyber_bee/presentation/profile/screens/notification_settings.dart';
+import 'package:cyber_bee/presentation/profile/widgets/profile_pick_view.dart';
 import 'package:cyber_bee/presentation/profile/widgets/single_setting_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -35,34 +36,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            child: Container(
-              decoration: const BoxDecoration(
-                color: MyColors.backgroundBlackColor,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(
-                    150,
-                  ),
-                ),
-              ),
-              child: Center(
-                child: FutureBuilder(
-                  future: UserDetails.getProfilePicLink(),
-                  builder: (context, snapshot) {
-                    if (snapshot.data != null && snapshot.data!.isNotEmpty) {
-                      return Image.network(
-                        snapshot.data!,
-                        fit: BoxFit.cover,
-                      );
-                    }
-                    return FaIcon(
-                      FontAwesomeIcons.circleUser,
-                      size: 180,
-                      color: MyColors.iconSecondarywhiteColor.withOpacity(0.7),
-                    );
-                  },
-                ),
-              ),
-            ),
+            child: const ProfilePicView(),
           ),
           k10Height,
           FutureBuilder<String>(
@@ -70,8 +44,10 @@ class ProfileScreen extends StatelessWidget {
             builder: (context, snapshot) {
               return Text(
                 snapshot.data ?? '',
-                style: MyTextStyles.h1
-                    .copyWith(fontWeight: FontWeight.bold, fontSize: 30),
+                style: MyTextStyles.h1.copyWith(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                ),
               );
             },
           ),

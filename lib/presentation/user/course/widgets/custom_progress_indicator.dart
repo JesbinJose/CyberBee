@@ -15,12 +15,8 @@ class CustomLinearProgressIndicator extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(
-                  10,
-                ),
-              ),
+            decoration: BoxDecoration(
+              borderRadius: circleRad(10),
               color: MyColors.textWhiteColor,
             ),
             width: maxWidth,

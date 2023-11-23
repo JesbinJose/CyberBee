@@ -28,7 +28,11 @@ class UserDetails {
     return _user.collection("certificates").snapshots();
   }
 
-  static Future<String> getProfilePicLink()async {
+  static Future<void> addProfilePic(String path) async {
+    _user.update({'profile_pic': path});
+  }
+
+  static Future<String> getProfilePicLink() async {
     return (await _user.get()).data()!['profile_pic'];
   }
 }

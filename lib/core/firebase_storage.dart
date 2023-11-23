@@ -1,12 +1,22 @@
-// import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
+import 'package:cyber_bee/presentation/widgets/show_snakbar.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
-// class FireBaseStorage{
-//   final storageRef = FirebaseStorage.instance.ref();
-
-// // Create a reference to "mountains.jpg"
-// final mountainsRef = storageRef.child("mountains.jpg");
-
-// // Create a reference to 'images/mountains.jpg'
-// final mountainImagesRef = storageRef.child("images/mountains.jpg");
-
-// }
+class FireBaseStorage {
+  static Future<String?> upladImageToFirebaseStorage(
+    final context, {
+    required File file,
+    required String userId,
+  }) async {
+    try {
+      final storageRef =
+          FirebaseStorage.instance.ref().child('profile_pics/$userId.jpg');
+      final metadata = SettableMetadata(contentType: 'image/png');
+      await storageRef.putData(file.readAsBytesSync(), metadata);
+      return await storageRef.getDownloadURL();
+    } catch (e) {
+      mySnakbar(context, e.toString());
+    }
+    return null;
+  }
+}

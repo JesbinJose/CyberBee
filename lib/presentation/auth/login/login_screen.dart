@@ -5,14 +5,9 @@ import 'package:cyber_bee/presentation/widgets/custom_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _userNameController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
@@ -78,41 +73,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Text(
                       'Remeber me',
-                      style: MyTextStyles.h6,
+                      style: MyTextStyles.h4,
                     ),
                     k10Width,
-                    Container(
-                      padding: const EdgeInsets.all(1),
-                      width: 45,
-                      height: 25,
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF6C63FF),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            20,
+                    ValueListenableBuilder<bool>(
+                      valueListenable: _saveLogin,
+                      builder: (context, v, _) {
+                        return Switch(
+                          activeColor: MyColors.primaryRedColor,
+                          activeTrackColor: MyColors.backgroundBlackColor,
+                          inactiveTrackColor: MyColors.backgroundBlackColor,
+                          trackOutlineColor: MaterialStateProperty.all(
+                            const Color(0xFF6C63FF),
                           ),
-                        ),
-                      ),
-                      child: ValueListenableBuilder<bool>(
-                        valueListenable: _saveLogin,
-                        builder: (context, v, _) {
-                          return Switch(
-                            activeColor: MyColors.primaryRedColor,
-                            activeTrackColor: MyColors.backgroundBlackColor,
-                            inactiveTrackColor: MyColors.backgroundBlackColor,
-                            trackOutlineColor: MaterialStateProperty.all(
-                              MyColors.backgroundBlackColor,
-                            ),
-                            trackOutlineWidth:
-                                const MaterialStatePropertyAll(10),
-                            splashRadius: 5,
-                            value: _saveLogin.value,
-                            onChanged: (value) {
-                              _saveLogin.value = !_saveLogin.value;
-                            },
-                          );
-                        },
-                      ),
+                          value: _saveLogin.value,
+                          onChanged: (value) {
+                            _saveLogin.value = !_saveLogin.value;
+                          },
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -121,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
               k10Height,
               Center(
                 child: MyCustomButton(
-                  function: () async => await ValidateLogin.validate(
+                  function: () async => ValidateLogin.validate(
                     context: context,
                     formKey: _formKey,
                     username: _userNameController.text,
@@ -138,13 +117,5 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _passwordController.dispose();
-    _userNameController.dispose();
-    _saveLogin.dispose();
-    super.dispose();
   }
 }

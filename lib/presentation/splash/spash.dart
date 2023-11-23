@@ -50,7 +50,7 @@ class SplashScreen extends StatelessWidget {
                               ProfileScreen(),
                             ],
                           )
-                        : const LoginScreen();
+                        : LoginScreen();
                   },
                 ),
               );

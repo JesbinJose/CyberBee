@@ -18,9 +18,8 @@ class FirebaseAuthFunctions {
     required String docID,
     required String password,
   }) async {
-    final DocumentReference doc = _instance.collection('users').doc(docID);
-    await doc.set(SomeData.map(username));
-    doc.collection('courses_in_progress');
+    await _instance.collection('users').doc(docID).set(SomeData.map(username));
+    _instance.collection('users').doc(docID).collection('courses_in_progress');
     await _instance.collection('usernames').doc(username).set({
       _docid: docID,
       _password: password,

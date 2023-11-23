@@ -60,7 +60,7 @@ class SignUPScreen extends StatelessWidget {
                       ),
                       k30Height,
                       CustomTextFromField(
-                        passwordTwice: _passwordTwice,
+                        passwordTwice: _password,
                         formKey: _formKey,
                         password: _password,
                         hintText: 'Password',

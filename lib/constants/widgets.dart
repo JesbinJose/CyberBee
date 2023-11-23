@@ -15,6 +15,8 @@ Widget ratioSize(int flex) {
   );
 }
 
+BorderRadius circleRad(double val) => BorderRadius.all(Radius.circular(val));
+
 InputDecoration myFormFieldInputDecoration({
   required IconData icon,
   required String hintText,
@@ -36,7 +38,6 @@ InputDecoration myFormFieldInputDecoration({
         color: MyColors.primaryRedColor.withOpacity(0.6),
       ),
     ),
-    
     focusedBorder: const OutlineInputBorder(
       borderSide: BorderSide(
         color: MyColors.secondarybackgroundColor,
