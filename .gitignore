@@ -45,7 +45,4 @@ app.*.map.json
 
 
 # firbase details
-/lib/core/firebase/options/firebase_options.dart
-
-#admin details
-/lib/presentation/admin/
+/lib/core/firebase/
