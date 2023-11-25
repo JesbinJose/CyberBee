@@ -18,33 +18,37 @@ Widget ratioSize(int flex) {
 BorderRadius circleRad(double val) => BorderRadius.all(Radius.circular(val));
 
 InputDecoration myFormFieldInputDecoration({
-  required IconData icon,
+  required IconData? icon,
   required String hintText,
 }) {
   return InputDecoration(
-    prefixIcon: Icon(
+    prefixIcon: icon!=null ?Icon(
       icon,
       color: MyColors.textWhiteColor,
-    ),
+    ):null,
     hintText: hintText,
     hintStyle: MyTextStyles.h5,
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(
+        width: 1.5,
         color: MyColors.secondarybackgroundColor.withOpacity(0.6),
       ),
     ),
     errorBorder: OutlineInputBorder(
       borderSide: BorderSide(
+        width: 1.5,
         color: MyColors.primaryRedColor.withOpacity(0.6),
       ),
     ),
     focusedBorder: const OutlineInputBorder(
       borderSide: BorderSide(
+        width: 1.5,
         color: MyColors.secondarybackgroundColor,
       ),
     ),
     focusedErrorBorder: OutlineInputBorder(
       borderSide: BorderSide(
+        width: 1.5,
         color: MyColors.primaryRedColor.withOpacity(0.6),
       ),
     ),

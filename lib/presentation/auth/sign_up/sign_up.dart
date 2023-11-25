@@ -1,5 +1,4 @@
 import 'package:cyber_bee/constants/constants.dart';
-import 'package:cyber_bee/presentation/auth/sign_up/widgets/custom_text_field.dart';
 import 'package:cyber_bee/presentation/auth/sign_up/widgets/validate_button.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/cupertino.dart';
@@ -42,9 +41,7 @@ class SignUPScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       TextFormField(
-                        onChanged: (value) {
-                          _formKey.currentState!.validate();
-                        },
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         style: MyTextStyles.h4,
                         controller: _username,
                         decoration: myFormFieldInputDecoration(
@@ -59,12 +56,15 @@ class SignUPScreen extends StatelessWidget {
                         },
                       ),
                       k30Height,
-                      CustomTextFromField(
-                        passwordTwice: _password,
-                        formKey: _formKey,
-                        password: _password,
-                        hintText: 'Password',
-                        function: (value) {
+                      TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        style: MyTextStyles.h4,
+                        controller: _password,
+                        decoration: myFormFieldInputDecoration(
+                          icon: Icons.lock_person,
+                          hintText: 'Confirm Password',
+                        ),
+                        validator: (value) {
                           if (value == null || value.length < 5) {
                             return "Enter at least 6 characters for password";
                           } else if (value != _passwordTwice.text) {
@@ -72,21 +72,22 @@ class SignUPScreen extends StatelessWidget {
                           }
                           return null;
                         },
-                        icon: Icons.lock_person,
                       ),
                       k30Height,
-                      CustomTextFromField(
-                        passwordTwice: _passwordTwice,
-                        formKey: _formKey,
-                        password: _password,
-                        hintText: 'Confirm Password',
-                        function: (value) {
-                          if (value != _password.text) {
+                      TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        style: MyTextStyles.h4,
+                        controller: _passwordTwice,
+                        decoration: myFormFieldInputDecoration(
+                          icon: Icons.lock_person,
+                          hintText: 'Confirm Password',
+                        ),
+                        validator: (value) {
+                          if (value != _passwordTwice.text) {
                             return 'Enter same password';
                           }
                           return null;
                         },
-                        icon: Icons.lock_person,
                       ),
                       k30Height,
                       k30Height,

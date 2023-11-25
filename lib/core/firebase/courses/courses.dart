@@ -19,6 +19,7 @@ class GetAllCourseDetails {
       'amount': course.amount,
       'discount': course.discount,
       'intro_video': course.introVideo,
+      'intro_image':course.introImageLink,
       'levels_number': course.levelsNumber,
     };
     _instance.doc(course.courseName).set(data);

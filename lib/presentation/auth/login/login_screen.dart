@@ -30,9 +30,7 @@ class LoginScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextFormField(
-                onChanged: (value) {
-                  _formKey.currentState!.validate();
-                },
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 style: MyTextStyles.h4,
                 controller: _userNameController,
                 decoration: myFormFieldInputDecoration(
@@ -48,6 +46,7 @@ class LoginScreen extends StatelessWidget {
               ),
               k30Height,
               TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 style: MyTextStyles.h4,
                 controller: _passwordController,
                 decoration: myFormFieldInputDecoration(

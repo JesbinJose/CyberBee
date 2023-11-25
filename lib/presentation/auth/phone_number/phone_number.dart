@@ -29,9 +29,7 @@ class AuthPhoneScreen extends StatelessWidget {
               child: Column(
                 children: [
                   TextFormField(
-                    onChanged: (value) {
-                      _formKey.currentState!.validate();
-                    },
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     style: MyTextStyles.h4,
                     controller: _phoneNumberController,
                     decoration: myFormFieldInputDecoration(

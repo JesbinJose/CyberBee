@@ -1,30 +1,31 @@
 class MyCourse {
-  MyCourse(this.introImageLink, {
+  MyCourse({
     required this.courseName,
     required this.description,
     required this.amount,
     required this.discount,
     required this.introVideo,
-    required this.levelsNumber,
+    required this.introImageLink,
+    this.levelsNumber = 0,
   });
   final String courseName;
-  final String introImageLink;
   final String description;
   final int amount;
   final int discount;
   final String introVideo;
-  final int levelsNumber;
+  final String introImageLink;
+  int levelsNumber;
 }
 
 class MyLevel {
-  MyLevel(
-    this.partsName, {
+  MyLevel({
+    required this.partsNum,
     required this.levelName,
     required this.courseName,
   });
   final String courseName;
   final String levelName;
-  final int partsName;
+  final int partsNum;
 }
 
 enum PartType {
