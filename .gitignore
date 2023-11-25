@@ -45,4 +45,4 @@ app.*.map.json
 
 
 # firbase details
-/lib/core/firebase/
+/lib/core/
