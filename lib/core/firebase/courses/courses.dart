@@ -19,15 +19,35 @@ class GetAllCourseDetails {
       'amount': course.amount,
       'discount': course.discount,
       'intro_video': course.introVideo,
-      'intro_image':course.introImageLink,
+      'intro_image': course.introImageLink,
       'levels_number': course.levelsNumber,
     };
     _instance.doc(course.courseName).set(data);
   }
 
-  static Future<void> addLevel(MyLevel level) async {
-    _instance.doc(level.courseName).collection(level.levelName);
+  static Stream<QuerySnapshot> getAllLevels(String courseName) {
+    return _instance.doc(courseName).collection('levels').snapshots();
   }
 
-  static Future<void> addPartsInLevel(String courseName, String levelName,)async {}
+  static Future<void> addLevel(MyLevel level) async {
+    await _instance
+        .doc(level.courseName)
+        .collection('levels')
+        .doc(level.levelNumber)
+        .set({'level_name': level.levelName});
+  }
+
+  static Stream<QuerySnapshot> getAllParts(String courseName, String levelNo) {
+    return _instance
+        .doc(courseName)
+        .collection('levels')
+        .doc(levelNo)
+        .collection('parts')
+        .snapshots();
+  }
+
+  static Future<void> addPartsInLevel(
+    String courseName,
+    String levelName,
+  ) async {}
 }

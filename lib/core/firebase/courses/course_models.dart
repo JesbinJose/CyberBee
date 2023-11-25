@@ -18,18 +18,21 @@ class MyCourse {
 }
 
 class MyLevel {
-  MyLevel({
-    required this.partsNum,
+  MyLevel( {
+    this.partsNum = 0,
+    required this.levelNumber,
     required this.levelName,
     required this.courseName,
   });
   final String courseName;
+  final String levelNumber;
   final String levelName;
   final int partsNum;
 }
 
 enum PartType {
   video,
+  exam,
   pdf,
 }
 
