@@ -1,3 +1,4 @@
+import 'package:cyber_bee/constants/constants.dart';
 import 'package:cyber_bee/core/firebase/courses/course_models.dart';
 import 'package:cyber_bee/presentation/admin/course/level/parts/dif_parts/exam.dart';
 import 'package:cyber_bee/presentation/admin/course/level/parts/dif_parts/pdf.dart';
@@ -15,58 +16,75 @@ class AddPartToLevelInputScreen extends StatelessWidget {
   final String levelNo;
   final TextEditingController _partName = TextEditingController();
   final TextEditingController _partNo = TextEditingController();
+  final TextEditingController _description = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final ValueNotifier<PartType> _type = ValueNotifier<PartType>(PartType.exam);
+  final ValueNotifier<PartType> _type = ValueNotifier<PartType>(PartType.video);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            CustomTextFormField(
-              courseName: _partName,
-              hintText: 'Enter the name of the part',
-            ),
-            CustomTextFormField(
-              courseName: _partNo,
-              hintText: 'Enter the Number in order of the part',
-            ),
-            DropdownButton(
-              items: const [
-                DropdownMenuItem(
-                  value: PartType.video,
-                  child: Text('Video'),
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                CustomTextFormField(
+                  courseName: _partName,
+                  hintText: 'Enter the name of the part',
                 ),
-                DropdownMenuItem(
-                  value: PartType.pdf,
-                  child: Text('PDF'),
+                k20Height,
+                CustomTextFormField(
+                  courseName: _partNo,
+                  hintText: 'Enter the Number in order of the part',
                 ),
-                DropdownMenuItem(
-                  value: PartType.exam,
-                  child: Text('Exam'),
+                k20Height,
+                CustomTextFormField(
+                  courseName: _description,
+                  hintText: 'Description',
                 ),
+                k20Height,
+                DropdownMenu(
+                  dropdownMenuEntries: const [
+                    DropdownMenuEntry(
+                      value: PartType.video,
+                      label: 'Video',
+                    ),
+                    DropdownMenuEntry(
+                      value: PartType.pdf,
+                      label: 'PDF',
+                    ),
+                    DropdownMenuEntry(
+                      value: PartType.exam,
+                      label: 'Exam',
+                    ),
+                  ],
+                  onSelected: (value) => _type.value = value ?? PartType.video,
+                  textStyle: MyTextStyles.h4,
+                  initialSelection: PartType.video,
+                  width: MediaQuery.sizeOf(context).width * 0.9,
+                ),
+                k30Height,
+                ValueListenableBuilder(
+                  valueListenable: _type,
+                  builder: (_, value,__) {
+                    switch (value) {
+                      case PartType.exam:
+                        return const PartExamAddWidget();
+                      case PartType.pdf:
+                        return PartPdfAddWidget();
+                      default:
+                        return PartVideoAddWidget();
+                    }
+                  },
+                )
               ],
-              onChanged: (v) {},
             ),
-            ValueListenableBuilder(
-              valueListenable: _type,
-              builder: (context, value, child) {
-                switch (value) {
-                  case PartType.exam:
-                    return const PartExamAddWidget();
-                  case PartType.pdf:
-                    return const PartPdfAddWidget();
-                  default:
-                    return const PartVideoAddWidget();
-                }
-              },
-            )
-          ],
+          ),
         ),
       ),
     );
