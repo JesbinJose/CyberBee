@@ -14,7 +14,7 @@ class PartPdfAddWidget extends StatelessWidget {
       children: [
         CustomTextFormField(
           courseName: _pdf,
-          hintText: 'Video Link',
+          hintText: 'Pdf Link',
         ),
         k30Height,
         k30Height,
