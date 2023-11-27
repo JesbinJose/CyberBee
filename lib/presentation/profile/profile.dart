@@ -1,7 +1,9 @@
 import 'package:cyber_bee/constants/constants.dart';
 import 'package:cyber_bee/core/firebase/user_details/user_details.dart';
+import 'package:cyber_bee/core/starter_controls/starter_controller.dart';
 import 'package:cyber_bee/presentation/admin/course/admin_course.dart';
 import 'package:cyber_bee/presentation/admin/home/admin_home.dart';
+import 'package:cyber_bee/presentation/auth/login/login_screen.dart';
 import 'package:cyber_bee/presentation/main/main_screen.dart';
 import 'package:cyber_bee/presentation/profile/screens/account_settings.dart';
 import 'package:cyber_bee/presentation/profile/screens/notification_settings.dart';
@@ -90,6 +92,29 @@ class ProfileScreen extends StatelessWidget {
                       return const SizedBox.shrink();
                     },
                   ),
+                ListTile(
+                  leading: const FaIcon(
+                    FontAwesomeIcons.arrowRightFromBracket,
+                    color: MyColors.textWhiteColor,
+                  ),
+                  title: Text(
+                    'Logout',
+                    style: MyTextStyles.h3,
+                  ),
+                  onTap: () async {
+                    Navigator.popUntil(
+                      context,
+                      (route) => route.isFirst,
+                    );
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ),
+                    );
+                    await StarterControl.logout();
+                  },
+                ),
               ],
             ),
           ),

@@ -20,7 +20,7 @@ class PartPdfAddWidget extends StatelessWidget {
         k30Height,
         MyCustomButton(
           function: () {},
-          text: 'Add Video',
+          text: 'Add PDF',
         ),
       ],
     );
