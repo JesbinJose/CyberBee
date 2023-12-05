@@ -43,8 +43,9 @@ class OTPTimerWidget extends StatelessWidget {
                   k20Height,
                   MyCustomButton(
                     function: () async => await MyFirebaseAuth.verifyOTP(
-                            smsCode: _oTPcontroller.text, context: context)
-                        .then(
+                      smsCode: _oTPcontroller.text,
+                      context: context,
+                    ).then(
                       (value) {
                         if (value.isNotEmpty) {
                           _oTPcontroller.dispose();

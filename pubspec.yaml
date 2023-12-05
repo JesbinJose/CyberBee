@@ -50,6 +50,7 @@ dependencies:
   encrypt: ^5.0.3
   image_picker: ^1.0.4
   url_launcher: ^6.2.1
+  firebase_analytics: ^10.7.2
 
 dev_dependencies:
   flutter_test:

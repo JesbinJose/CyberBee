@@ -36,6 +36,7 @@ class ProfilePicView extends StatelessWidget {
                 return Image.network(
                   snapshot.data!,
                   width: double.infinity,
+                  height: double.infinity,
                   fit: BoxFit.cover,
                 );
               }
