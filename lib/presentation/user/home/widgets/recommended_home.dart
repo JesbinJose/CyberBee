@@ -1,49 +1,35 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cyber_bee/core/firebase/courses/courses.dart';
+import 'package:cyber_bee/presentation/widgets/single_course_tile.dart';
 import 'package:flutter/material.dart';
 
-class RecommendedHome extends StatelessWidget {
-  const RecommendedHome({
+class CourseListView extends StatelessWidget {
+  const CourseListView({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: StreamBuilder(
-          stream: GetAllCourseDetails.getCourses(),
-          builder: (context, snapshot) {
-            if (snapshot.data == null) {
-              return const Center(
-                child: Text(
-                  'There is no recomended Courses',
-                ),
-              );
-            }
-            return Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ...List.generate(
-                  snapshot.data?.docs.length ?? 0,
-                  (i) => Container(
-                    color: Colors.amber,
-                    margin: const EdgeInsets.all(10),
-                    width: 120,
-                    height: 160,
-                    child: Center(
-                      child: Text(
-                        i.toString(),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
+      height: 220,
+      width: double.infinity,
+      child: StreamBuilder<QuerySnapshot<Object?>>(
+        stream: GetAllCourseDetails.getCourses(),
+        builder: (context, snapshot) {
+          if (snapshot.data == null) return const SizedBox();
+          return ListView.builder(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              final course = snapshot.data!.docs[index];
+              return SingleCourseTile(course: course,onTap: (){},);
+            },
+            itemCount: snapshot.data!.docs.length,
+          );
+        },
       ),
     );
   }
 }
+

@@ -27,7 +27,7 @@ class ScreenHome extends StatelessWidget {
                 const MySearchBar(),
                 k10Height,
                 const CustomTitleTextWidget(title: 'Recommended',),
-                const RecommendedHome(),
+                const CourseListView(),
                 const CustomTitleTextWidget(title: 'Events',),
                 k10Height,
                 HomeEventCarosal(),

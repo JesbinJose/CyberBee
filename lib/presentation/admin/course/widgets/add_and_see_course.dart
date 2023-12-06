@@ -3,6 +3,7 @@ import 'package:cyber_bee/core/firebase/courses/courses.dart';
 import 'package:cyber_bee/presentation/admin/course/add_course_screens/add_course_screen.dart';
 import 'package:cyber_bee/presentation/admin/course/level/add_level_screen.dart';
 import 'package:cyber_bee/presentation/admin/widgets/add_custom_widget.dart';
+import 'package:cyber_bee/presentation/widgets/single_course_tile.dart';
 import 'package:flutter/material.dart';
 
 class AdminCourseView extends StatelessWidget {
@@ -53,7 +54,8 @@ class AdminCourseView extends StatelessWidget {
                 ),
                 ...List.generate(snapshot.data?.docs.length ?? 0, (i) {
                   final course = snapshot.data!.docs[i];
-                  return InkWell(
+                  return SingleCourseTile(
+                    course: course,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -64,17 +66,6 @@ class AdminCourseView extends StatelessWidget {
                         ),
                       );
                     },
-                    child: Container(
-                      color: Colors.amber,
-                      margin: const EdgeInsets.all(10),
-                      width: 120,
-                      height: 160,
-                      child: Center(
-                        child: Text(
-                          i.toString(),
-                        ),
-                      ),
-                    ),
                   );
                 }),
               ],
