@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cyber_bee/constants/constants.dart';
 import 'package:cyber_bee/core/firebase/events/events.dart';
+import 'package:cyber_bee/presentation/widgets/show_snakbar.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -38,11 +39,17 @@ class HomeEventCarosal extends StatelessWidget {
                     final QueryDocumentSnapshot event =
                         snapshot.data!.docs[index];
                     return InkWell(
-                      onTap: () => launchUrl(
-                        Uri.parse(
-                          event['link'],
-                        ),
-                      ),
+                      onTap: () {
+                        try {
+                          launchUrl(
+                            Uri.parse(
+                              event['link'],
+                            ),
+                          );
+                        } catch (e) {
+                          mySnakbar(context, e.toString());
+                        }
+                      },
                       child: Container(
                         margin: const EdgeInsets.symmetric(
                           horizontal: 10,

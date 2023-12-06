@@ -46,6 +46,7 @@ class LoginScreen extends StatelessWidget {
               ),
               k30Height,
               TextFormField(
+                obscureText: true,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 style: MyTextStyles.h4,
                 controller: _passwordController,

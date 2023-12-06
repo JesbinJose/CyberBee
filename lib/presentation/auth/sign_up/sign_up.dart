@@ -57,6 +57,7 @@ class SignUPScreen extends StatelessWidget {
                       ),
                       k30Height,
                       TextFormField(
+                        obscureText: true,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         style: MyTextStyles.h4,
                         controller: _password,
@@ -67,14 +68,13 @@ class SignUPScreen extends StatelessWidget {
                         validator: (value) {
                           if (value == null || value.length < 5) {
                             return "Enter at least 6 characters for password";
-                          } else if (value != _passwordTwice.text) {
-                            return 'Enter same password';
-                          }
+                          } 
                           return null;
                         },
                       ),
                       k30Height,
                       TextFormField(
+                        obscureText: true,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         style: MyTextStyles.h4,
                         controller: _passwordTwice,
@@ -83,7 +83,7 @@ class SignUPScreen extends StatelessWidget {
                           hintText: 'Confirm Password',
                         ),
                         validator: (value) {
-                          if (value != _passwordTwice.text) {
+                          if (value != _password.text) {
                             return 'Enter same password';
                           }
                           return null;

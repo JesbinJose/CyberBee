@@ -102,17 +102,46 @@ class ProfileScreen extends StatelessWidget {
                     style: MyTextStyles.h3,
                   ),
                   onTap: () async {
-                    Navigator.popUntil(
-                      context,
-                      (route) => route.isFirst,
-                    );
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
+                    showDialog(
+                      context: context,
+                      builder: (_) => SimpleDialog(
+                        title: const Text(
+                          'Do you want to logout',
+                        ),
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text(
+                                  'No',
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () async {
+                                  Navigator.popUntil(
+                                    context,
+                                    (route) => route.isFirst,
+                                  );
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => LoginScreen(),
+                                    ),
+                                  );
+                                  await StarterControl.logout();
+                                },
+                                child: const Text(
+                                  'Yes',
+                                ),
+                              ),
+                              const SizedBox(width: 20,),
+                            ],
+                          ),
+                        ],
                       ),
                     );
-                    await StarterControl.logout();
                   },
                 ),
               ],
