@@ -22,10 +22,16 @@ InputDecoration myFormFieldInputDecoration({
   required String hintText,
 }) {
   return InputDecoration(
-    prefixIcon: icon!=null ?Icon(
-      icon,
-      color: MyColors.textWhiteColor,
-    ):null,
+    prefixIcon: icon != null
+        ? Icon(
+            icon,
+            color: MyColors.textWhiteColor,
+          )
+        : const Icon(
+            Icons.circle,
+            size: 1,
+            color: MyColors.backgroundBlackColor,
+          ),
     hintText: hintText,
     hintStyle: MyTextStyles.h5,
     enabledBorder: OutlineInputBorder(

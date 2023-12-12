@@ -1,6 +1,8 @@
 import 'package:cyber_bee/constants/constants.dart';
+import 'package:cyber_bee/core/firebase/user_details/firebase_functions.dart';
 import 'package:cyber_bee/domain/login_validation.dart';
 import 'package:cyber_bee/presentation/auth/login/widgets/register_account_button.dart';
+import 'package:cyber_bee/presentation/widgets/async_textformfield.dart';
 import 'package:cyber_bee/presentation/widgets/custom_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,20 +31,27 @@ class LoginScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                style: MyTextStyles.h4,
+              AsyncTextFormField(
+                isNumberAllowed: false,
+                valueIsEmptyMessage: "Please enter username",
+                isValidatingMessage: "Checking for the username",
+                valueIsInvalidMessage: "Username is Not registered",
+                validator: (value) async {
+                  if (!await FirebaseAuthFunctions.isUserNameAlreadyPresent(
+                    value,
+                  )) {
+                    return false;
+                  }
+                  return true;
+                },
+                validationDebounce: const Duration(
+                  seconds: 2,
+                ),
                 controller: _userNameController,
                 decoration: myFormFieldInputDecoration(
                   icon: CupertinoIcons.phone,
                   hintText: 'Username',
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Please enter username";
-                  }
-                  return null;
-                },
               ),
               k30Height,
               TextFormField(
