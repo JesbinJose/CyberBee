@@ -59,7 +59,6 @@ class SplashScreen extends StatelessWidget {
         }
       },
     );
-
     return const Scaffold();
   }
 }
