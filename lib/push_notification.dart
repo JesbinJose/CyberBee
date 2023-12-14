@@ -13,6 +13,5 @@ class PushNotifications {
       provisional: false,
       sound: true,
     );
-    print( await _firebaseMessging.getToken());
   }
 }

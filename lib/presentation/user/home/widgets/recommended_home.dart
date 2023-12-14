@@ -1,6 +1,6 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cyber_bee/core/firebase/courses/courses.dart';
+import 'package:cyber_bee/presentation/user/single_course/course_view.dart';
 import 'package:cyber_bee/presentation/widgets/single_course_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,17 @@ class CourseListView extends StatelessWidget {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               final course = snapshot.data!.docs[index];
-              return SingleCourseTile(course: course,onTap: (){},);
+              return SingleCourseTile(
+                course: course,
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CourseViewScreen(
+                      course: course,
+                    ),
+                  ),
+                ),
+              );
             },
             itemCount: snapshot.data!.docs.length,
           );
@@ -32,4 +42,3 @@ class CourseListView extends StatelessWidget {
     );
   }
 }
-
