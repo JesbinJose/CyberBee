@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cyber_bee/core/firebase/courses/courses.dart';
-import 'package:cyber_bee/presentation/user/single_course/course_view.dart';
+import 'package:cyber_bee/presentation/user/single_course/screens/front_course_view.dart';
 import 'package:cyber_bee/presentation/widgets/single_course_tile.dart';
 import 'package:flutter/material.dart';
 
