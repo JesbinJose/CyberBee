@@ -24,13 +24,8 @@ class _CourseViewScreenState extends State<CourseViewScreen> {
         ),
       );
     });
-    loadVideo();
-
+    controller.load('');
     super.initState();
-  }
-
-  loadVideo() {
-    controller.load('pWJojmHLDFM');
   }
 
   String extractVideoId(String url) {
