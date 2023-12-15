@@ -17,7 +17,7 @@ class MyCustomSmallButton extends StatelessWidget {
       onTap: function,
       child: Container(
         padding: const EdgeInsets.symmetric(
-          vertical: 1,
+          vertical: 5,
           horizontal: 10,
         ),
         decoration: const BoxDecoration(
