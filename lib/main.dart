@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cyber_bee/constants/constants.dart';
 import 'package:cyber_bee/core/firebase/options/firebase_options.dart';
 import 'package:cyber_bee/presentation/splash/spash.dart';
@@ -9,7 +11,7 @@ import 'package:flutter/material.dart';
 
 Future<void> _firebaseBackgroundMessaging(RemoteMessage message) async {
   if (message.notification != null) {
-    print(message.messageId);
+    log(message.messageId!);
   }
 }
 

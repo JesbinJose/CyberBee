@@ -14,6 +14,11 @@ class CourseAllPartScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(course.id),
       ),
+      body:  Column(
+        children: [
+          Container(),
+        ],
+      ),
     );
   }
 }
