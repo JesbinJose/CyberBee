@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:cyber_bee/constants/constants.dart';
+import 'package:cyber_bee/core/firebase/message/send_message.dart';
 import 'package:cyber_bee/core/firebase/options/firebase_options.dart';
 import 'package:cyber_bee/presentation/splash/spash.dart';
 import 'package:cyber_bee/push_notification.dart';
@@ -11,7 +10,7 @@ import 'package:flutter/material.dart';
 
 Future<void> _firebaseBackgroundMessaging(RemoteMessage message) async {
   if (message.notification != null) {
-    log(message.messageId!);
+    debugPrint(message.messageId!);
   }
 }
 
@@ -24,6 +23,12 @@ void main() async {
     appleProvider: AppleProvider.debug,
   );
   await PushNotifications.init();
+  SendPushNotification().sendMessage(
+    title: 'Jesbin',
+    message: "Hello how are you",
+    toUserId:
+        'dvfauoK1Q3yMkq88e4RYG8:APA91bGoFEHV9pCTvMI5PdAzxwvZVzIyGu8oM4PR3waWVz6dwxVEgl7SuR4emus7_Zf162UvQAIXs3AFziL8wAhjZyXBmcSqTNjmnmwZ5zOdOTmrCg2JpdXEOZ0GPcro9avnxgeemdFC',
+  );
   runApp(const MyApp());
 }
 
