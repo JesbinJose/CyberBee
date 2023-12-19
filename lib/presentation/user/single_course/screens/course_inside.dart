@@ -15,12 +15,14 @@ class CourseAllPartScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(course.id),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          children: [
-            ShowLevelWdget(course: course),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            children: [
+              ShowLevelWdget(course: course),
+            ],
+          ),
         ),
       ),
     );

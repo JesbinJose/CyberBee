@@ -17,7 +17,7 @@ class SinglePartWidget extends StatelessWidget {
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const SinglePartScreen(),
+          builder: (context) => SinglePartScreen(part: part),
         ),
       ),
       child: Padding(
