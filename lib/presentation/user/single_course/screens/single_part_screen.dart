@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cyber_bee/presentation/user/single_course/screens/pdf_part.dart';
-import 'package:cyber_bee/presentation/user/single_course/widgets/video_part_widget.dart';
+import 'package:cyber_bee/presentation/user/single_course/screens/video_part_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
