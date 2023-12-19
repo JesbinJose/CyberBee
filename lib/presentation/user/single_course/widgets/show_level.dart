@@ -19,12 +19,8 @@ class ShowLevelWdget extends StatelessWidget {
       child: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 41, 42, 43),
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(
-              20,
-            ),
-          ),
+          color: Color.fromARGB(255, 70, 71, 71),
+          borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
         child: Column(
           children: [

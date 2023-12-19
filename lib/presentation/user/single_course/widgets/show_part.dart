@@ -1,6 +1,6 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cyber_bee/constants/text_styles.dart';
+import 'package:cyber_bee/presentation/user/single_course/widgets/single_part_widget.dart';
 import 'package:flutter/material.dart';
 
 class ShowPartsWidget extends StatelessWidget {
@@ -18,8 +18,7 @@ class ShowPartsWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(10),
       width: double.infinity,
-      height: 300,
-      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+      padding: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(10),
@@ -36,21 +35,12 @@ class ShowPartsWidget extends StatelessWidget {
                 .collection('parts')
                 .snapshots(),
             builder: (context, snapshot) {
-              if (snapshot.data != null) {
+              if (snapshot.data != null && snapshot.data!.docs.isNotEmpty) {
                 return ListView.separated(
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     final part = snapshot.data!.docs[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
-                      ),
-                      child: Text(
-                        part['partName'],
-                        style: MyTextStyles.h3,
-                      ),
-                    );
+                    return SinglePartWidget(part: part);
                   },
                   separatorBuilder: (BuildContext context, int index) =>
                       const Divider(
@@ -60,9 +50,13 @@ class ShowPartsWidget extends StatelessWidget {
                   itemCount: snapshot.data!.docs.length,
                 );
               }
-              return const Center(
-                child: Text(
-                  'No parts Added',
+              return SizedBox(
+                height: 200,
+                child: Center(
+                  child: Text(
+                    'No parts Added',
+                    style: MyTextStyles.h3,
+                  ),
                 ),
               );
             },
