@@ -7,6 +7,7 @@ class ChatControls {
   }
   late CollectionReference<Map<String, dynamic>> instance;
   Future<void> sendMessageToAdmin(Message message) async {
+    
     instance
         .doc('toAdmin')
         .collection(message.fromUserId)
@@ -21,5 +22,4 @@ class ChatControls {
   Stream<DocumentSnapshot<Map<String, dynamic>>> getAllMessages() {
     return instance.doc('toAdmin').snapshots();
   }
-  
 }

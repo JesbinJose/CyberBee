@@ -13,41 +13,43 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(3),
-              width: 200,
-              height: 200,
-              decoration: const BoxDecoration(
-                color: MyColors.primaryRedColor,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(
-                    150,
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(3),
+                width: 200,
+                height: 200,
+                decoration: const BoxDecoration(
+                  color: MyColors.primaryRedColor,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(
+                      150,
+                    ),
                   ),
                 ),
+                child: const ProfilePicView(),
               ),
-              child: const ProfilePicView(),
-            ),
-            k10Height,
-            FutureBuilder<String>(
-              future: UserDetails.getUsername(),
-              builder: (context, snapshot) {
-                return Text(
-                  snapshot.data ?? '',
-                  style: MyTextStyles.h1.copyWith(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                  ),
-                );
-              },
-            ),
-            k30Height,
-            SettingOptions(isInAdminPanel: isInAdminPanel),
-          ],
+              k10Height,
+              FutureBuilder<String>(
+                future: UserDetails.getUsername(),
+                builder: (context, snapshot) {
+                  return Text(
+                    snapshot.data ?? '',
+                    style: MyTextStyles.h1.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    ),
+                  );
+                },
+              ),
+              k30Height,
+              SettingOptions(isInAdminPanel: isInAdminPanel),
+            ],
+          ),
         ),
       ),
     );

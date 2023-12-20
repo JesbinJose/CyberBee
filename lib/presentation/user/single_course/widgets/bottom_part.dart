@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cyber_bee/constants/constants.dart';
+import 'package:cyber_bee/core/firebase/user_details/user_details.dart';
+import 'package:cyber_bee/presentation/chat/single_chat_screen.dart';
 import 'package:cyber_bee/presentation/user/single_course/screens/course_inside.dart';
 import 'package:cyber_bee/presentation/widgets/small_custom_button.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +32,18 @@ class ShowPricingPart extends StatelessWidget {
             Container(),
             const Spacer(),
             MyCustomSmallButton(
-              function: () {},
+              function: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SingleChatScreen(
+                      isAdmin: false,
+                      userId: UserDetails.userId,
+                      userName: 'Contact Us',
+                    ),
+                  ),
+                );
+              },
               content: 'Contact Us',
             ),
             k10Width,
