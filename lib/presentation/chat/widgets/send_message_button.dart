@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cyber_bee/constants/my_colors.dart';
 import 'package:cyber_bee/core/firebase/chat/chat.dart';
 import 'package:cyber_bee/core/firebase/chat/chat_models.dart';
@@ -28,7 +27,7 @@ class SendMessageButton extends StatelessWidget {
           if (message.text.isNotEmpty) {
             final Message message = Message(
               touserId: toUserId,
-              dateAndTime: Timestamp.now(),
+              dateAndTime: DateTime.now(),
               message: this.message.text,
               fromUserId: fromUserId,
             );

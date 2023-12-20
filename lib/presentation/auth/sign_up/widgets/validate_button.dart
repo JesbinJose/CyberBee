@@ -38,17 +38,19 @@ class ValidateButton extends StatelessWidget {
               username: _username.text,
               docID: userId,
               password: _password.text,
-            ).then((value) {
-              _password.dispose();
-              _passwordTwice.dispose();
-              _username.dispose();
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
-                ),
-              );
-            });
+            ).then(
+              (value) {
+                _password.dispose();
+                _passwordTwice.dispose();
+                _username.dispose();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginScreen(),
+                  ),
+                );
+              },
+            );
           }
         }
       },
