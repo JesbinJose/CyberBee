@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cyber_bee/constants/my_colors.dart';
 import 'package:cyber_bee/core/firebase/chat/chat.dart';
 import 'package:cyber_bee/core/firebase/chat/chat_models.dart';
@@ -5,7 +6,10 @@ import 'package:flutter/material.dart';
 
 class SendMessageButton extends StatelessWidget {
   const SendMessageButton({
-    super.key, required this.toUserId, required this.message, required this.fromUserId,
+    super.key,
+    required this.toUserId,
+    required this.message,
+    required this.fromUserId,
   });
   final String toUserId;
   final TextEditingController message;
@@ -24,11 +28,12 @@ class SendMessageButton extends StatelessWidget {
           if (message.text.isNotEmpty) {
             final Message message = Message(
               touserId: toUserId,
-              dateAndTime: DateTime.now(),
+              dateAndTime: Timestamp.now(),
               message: this.message.text,
               fromUserId: fromUserId,
             );
             ChatControls().sendMessageToAdmin(message);
+            this.message.text = '';
           }
         },
         child: Transform.rotate(

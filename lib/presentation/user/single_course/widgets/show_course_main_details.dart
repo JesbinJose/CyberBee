@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cyber_bee/constants/constants.dart';
 import 'package:cyber_bee/presentation/user/single_course/widgets/bottom_part.dart';
@@ -68,6 +67,7 @@ class SingleCourseMainWidget extends StatelessWidget {
         if (size.width < size.height)
           ShowPricingPart(
             course: course,
+            controller: controller,
           ),
       ],
     );

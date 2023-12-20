@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Message {
   late String touserId;
-  late DateTime dateAndTime;
+  late Timestamp dateAndTime;
   late String message;
   late String fromUserId;
   Message({
@@ -12,7 +12,7 @@ class Message {
     required this.fromUserId,
   });
   Message.fromMap(final QueryDocumentSnapshot<Map<String, dynamic>> data) {
-    touserId = data['toUser'];
+    touserId = data['toUser'].toString();
     dateAndTime = data['time'];
     message = data['message'];
     fromUserId = data['fromUser'];
