@@ -33,30 +33,45 @@ class NotificationScreen extends StatelessWidget {
                 ),
               );
             }
-            return ListView.separated(
-              itemBuilder: (context, index) {
-                final message = snapshot.data![index];
-                return ListTile(
-                  onTap: () {
-                    launchUrl(
-                      Uri.parse(
-                        message['url'],
+            return Column(
+              children: [
+                const SizedBox(height: 30),
+                ListView.separated(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    final message = snapshot.data![index];
+                    return ListTile(
+                      onTap: () {
+                        launchUrl(
+                          Uri.parse(
+                            message['url'],
+                          ),
+                        ).then(
+                          (value) async {
+                            await UserDetails.deleteNotification(index).then(
+                              (value) => snapshot.data!.remove(index),
+                            );
+                          },
+                        );
+                      },
+                      title: Text(
+                        message['message']!,
+                        style: MyTextStyles.h4,
                       ),
-                    ).then((value) {
-                      
-                    });
-
+                      trailing: const Icon(Icons.arrow_forward_ios),
+                    );
                   },
-                  title: Text(
-                    message['message']!,
-                    style: MyTextStyles.h4,
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) {
-                return const Divider();
-              },
-              itemCount: snapshot.data!.length,
+                  separatorBuilder: (context, index) {
+                    return const Divider(
+                      color: MyColors.iconPrimaryGreyColor,
+                    );
+                  },
+                  itemCount: snapshot.data!.length,
+                ),
+                const Divider(
+                  color: MyColors.iconPrimaryGreyColor,
+                ),
+              ],
             );
           },
         ),

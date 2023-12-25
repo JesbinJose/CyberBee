@@ -44,4 +44,9 @@ class UserDetails {
   static Future<List> getAllNotifications() async {
     return (await _user.get()).data()!['notification'];
   }
+
+  static Future<void> deleteNotification(final i) async {
+    var up = ((await _user.get()).data()!['notification'] as List).removeAt(i);
+    await _user.update({'notification': up});
+  }
 }
