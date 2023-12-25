@@ -9,7 +9,7 @@ class SingleCourseTile extends StatelessWidget {
     required this.course, required this.onTap,
   });
 
-  final QueryDocumentSnapshot<Object?> course;
+  final DocumentSnapshot<Object?> course;
   final VoidCallback onTap;
 
   @override

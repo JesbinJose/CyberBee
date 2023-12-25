@@ -13,7 +13,7 @@ class ShowPricingPart extends StatelessWidget {
     required this.course,
     required this.controller,
   });
-  final QueryDocumentSnapshot course;
+  final DocumentSnapshot course;
   final YoutubePlayerController controller;
   @override
   Widget build(BuildContext context) {

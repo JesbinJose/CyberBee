@@ -17,7 +17,7 @@ class SingleCourseMainWidget extends StatefulWidget {
   final Size size;
   final ValueNotifier<bool> isdispose;
   final YoutubePlayerController controller;
-  final QueryDocumentSnapshot<Object?> course;
+  final DocumentSnapshot<Object?> course;
 
   @override
   State<SingleCourseMainWidget> createState() => _SingleCourseMainWidgetState();

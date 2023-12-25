@@ -14,11 +14,6 @@ class UserDetails {
     return (await _user.get()).data()?['isAdmin'] ?? false;
   }
 
-  //User Courses
-  static Stream<QuerySnapshot> getAllCourseInProgress() {
-    return _user.collection('courses_in_progress').snapshots();
-  }
-
   static Future<double> getProgress() async {
     return (await _user.collection('courses_in_progress').get()).docs.length /
         (await _instance.collection('courses').get()).docs.length;
@@ -34,5 +29,18 @@ class UserDetails {
 
   static Future<String> getProfilePicLink() async {
     return (await _user.get()).data()!['profile_pic'];
+  }
+
+  static Future<List> getCoursesInprogress(
+      String userId) async {
+    final refernce = await _instance.collection('users').doc(userId).get();
+    return refernce.data()!['courses'] as List;
+  }
+
+  static Future enrollCourse(String userId, DocumentReference course) async {
+    final reference = _instance.collection('users').doc(userId);
+    await reference.update({
+      'courses': FieldValue.arrayUnion([course])
+    });
   }
 }

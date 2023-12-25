@@ -6,7 +6,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 // ignore: must_be_immutable
 class CourseViewScreen extends StatelessWidget {
   CourseViewScreen({super.key, required this.course});
-  final QueryDocumentSnapshot course;
+  final DocumentSnapshot course;
   final ValueNotifier<bool> isdispose = ValueNotifier(true);
   late YoutubePlayerController controller;
 

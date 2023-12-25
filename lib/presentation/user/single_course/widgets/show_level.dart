@@ -10,7 +10,7 @@ class ShowLevelWdget extends StatelessWidget {
     required this.course,
   });
 
-  final QueryDocumentSnapshot<Object?> course;
+  final DocumentSnapshot<Object?> course;
 
   ValueNotifier<String> level = ValueNotifier('001');
   @override

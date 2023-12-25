@@ -10,7 +10,7 @@ class ShowLevelsPart extends StatelessWidget {
     required this.level,
   });
 
-  final QueryDocumentSnapshot<Object?> course;
+  final DocumentSnapshot<Object?> course;
   final ValueNotifier<String> level;
 
   @override

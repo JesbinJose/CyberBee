@@ -7,7 +7,7 @@ class CourseAllPartScreen extends StatelessWidget {
     super.key,
     required this.course,
   });
-  final QueryDocumentSnapshot course;
+  final DocumentSnapshot course;
 
   @override
   Widget build(BuildContext context) {

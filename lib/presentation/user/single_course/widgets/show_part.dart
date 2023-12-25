@@ -11,7 +11,7 @@ class ShowPartsWidget extends StatelessWidget {
   });
 
   final ValueNotifier<String> level;
-  final QueryDocumentSnapshot<Object?> course;
+  final DocumentSnapshot<Object?> course;
 
   @override
   Widget build(BuildContext context) {

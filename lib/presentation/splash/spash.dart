@@ -16,7 +16,6 @@ enum Screen {
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     Screen screen = Screen.starter;
