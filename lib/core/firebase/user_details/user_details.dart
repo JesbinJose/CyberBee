@@ -15,7 +15,7 @@ class UserDetails {
   }
 
   static Future<double> getProgress() async {
-    return (await _user.collection('courses_in_progress').get()).docs.length /
+    return ((await _user.get()).data()!['notification'] as List).length /
         (await _instance.collection('courses').get()).docs.length;
   }
 
@@ -42,7 +42,7 @@ class UserDetails {
   }
 
   static Future<List> getAllNotifications() async {
-    return (await _user.get()).data()!['notification'];
+    return (await _user.get()).data()!['notification'] as List;
   }
 
   static Future<void> deleteNotification(final i) async {

@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cyber_bee/constants/constants.dart';
 import 'package:cyber_bee/core/firebase/courses/courses.dart';
+import 'package:cyber_bee/presentation/user/single_course/screens/front_course_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class Search extends SearchDelegate<String>{
+class Search extends SearchDelegate<String> {
   Search()
       : super(
           searchFieldStyle: MyTextStyles.h4,
@@ -52,11 +53,18 @@ class Search extends SearchDelegate<String>{
             result.add(e);
           }
         }
+        if (result.isEmpty) return Center(child: Text('There is no course containing $query',style: MyTextStyles.h3,),);
         return ListView.builder(
           itemCount: result.length,
           itemBuilder: (BuildContext context, int index) {
             final QueryDocumentSnapshot data = result[index];
             return ListTile(
+              onTap: () => Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CourseViewScreen(course: data),
+                ),
+              ),
               title: Text(
                 data.id,
                 style: MyTextStyles.h5.copyWith(
@@ -94,11 +102,18 @@ class Search extends SearchDelegate<String>{
           }
         }
         result = result.toSet().toList();
+        if (result.isEmpty) return Center(child: Text('There is no course containing $query',style: MyTextStyles.h3,),);
         return ListView.builder(
           itemCount: result.length,
           itemBuilder: (BuildContext context, int index) {
-            final QueryDocumentSnapshot data = result[index];
+            final DocumentSnapshot data = result[index];
             return ListTile(
+              onTap: () => Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CourseViewScreen(course: data),
+                ),
+              ),
               title: Text(
                 data.id,
                 style: MyTextStyles.h5.copyWith(
