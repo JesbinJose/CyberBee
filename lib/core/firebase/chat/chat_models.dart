@@ -11,7 +11,7 @@ class Message {
     required this.message,
     required this.fromUserId,
   });
-  Message.fromMap(final QueryDocumentSnapshot<Map<String, dynamic>> data) {
+  Message.fromMap(final DocumentSnapshot<Map<String, dynamic>> data) {
     touserId = data['toUser'].toString();
     dateAndTime = (data['time'] as Timestamp).toDate();
     message = data['message'];

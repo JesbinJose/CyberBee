@@ -6,9 +6,9 @@ import 'package:cyber_bee/presentation/admin/course/admin_course.dart';
 import 'package:cyber_bee/presentation/admin/home/admin_home.dart';
 import 'package:cyber_bee/presentation/auth/login/login_screen.dart';
 import 'package:cyber_bee/presentation/main/main_screen.dart';
+import 'package:cyber_bee/presentation/notification/notifications.dart';
 import 'package:cyber_bee/presentation/profile/profile.dart';
 import 'package:cyber_bee/presentation/profile/screens/account_settings.dart';
-import 'package:cyber_bee/presentation/profile/screens/notification_settings.dart';
 import 'package:cyber_bee/presentation/profile/widgets/single_setting_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -37,7 +37,7 @@ class SettingOptions extends StatelessWidget {
           const SettingsTileWidget(
             title: 'Notifications',
             icon: FontAwesomeIcons.bell,
-            widget: UserNotificationSettingsScreen(),
+            widget: NotificationScreen(),
           ),
           if (!isInAdminPanel)
             FutureBuilder(

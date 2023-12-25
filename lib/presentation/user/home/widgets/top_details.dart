@@ -1,6 +1,7 @@
 import 'package:cyber_bee/constants/my_colors.dart';
 import 'package:cyber_bee/constants/text_styles.dart';
 import 'package:cyber_bee/core/firebase/user_details/user_details.dart';
+import 'package:cyber_bee/presentation/notification/notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -27,17 +28,20 @@ class HomeTopDetails extends StatelessWidget {
               builder: (context, snapshot) {
                 return Text(
                   snapshot.data ?? '',
-                  style: MyTextStyles.h1.copyWith(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 24
-                  ),
+                  style: MyTextStyles.h1
+                      .copyWith(fontWeight: FontWeight.w500, fontSize: 24),
                 );
               },
             ),
           ],
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const NotificationScreen(),
+            ),
+          ),
           icon: const FaIcon(
             FontAwesomeIcons.bell,
             size: 25,

@@ -31,16 +31,17 @@ class UserDetails {
     return (await _user.get()).data()!['profile_pic'];
   }
 
-  static Future<List> getCoursesInprogress(
-      String userId) async {
-    final refernce = await _instance.collection('users').doc(userId).get();
-    return refernce.data()!['courses'] as List;
+  static Future<List> getCoursesInprogress(String userId) async {
+    return (await _user.get()).data()!['courses'] as List;
   }
 
-  static Future enrollCourse(String userId, DocumentReference course) async {
-    final reference = _instance.collection('users').doc(userId);
-    await reference.update({
-      'courses': FieldValue.arrayUnion([course])
+  static Future enrollCourse(DocumentReference course) async {
+    await _user.update({
+      'courses': FieldValue.arrayUnion([course]),
     });
+  }
+
+  static Future<List> getAllNotifications() async {
+    return (await _user.get()).data()!['notification'];
   }
 }

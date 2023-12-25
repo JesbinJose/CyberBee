@@ -3,7 +3,10 @@ final class SomeData {
         'username': username,
         'isAdmin': false,
         'isTutor': false,
-        'profile_pic':'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzBXNuO6PezhC18aYH_2cYtS0I7KbxoKYdwA&usqp=CAU',
+        'courses': [],
+        'notification':[],
+        'profile_pic':
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzBXNuO6PezhC18aYH_2cYtS0I7KbxoKYdwA&usqp=CAU',
         'courses_taken': 0,
       };
 }
