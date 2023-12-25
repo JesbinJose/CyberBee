@@ -1,5 +1,5 @@
 import 'package:cyber_bee/constants/constants.dart';
-import 'package:cyber_bee/core/firebase/user_details/user_details.dart';
+import 'package:cyber_bee/presentation/user/course/widgets/certificate_part.dart';
 import 'package:cyber_bee/presentation/user/course/widgets/course_progress_part.dart';
 import 'package:cyber_bee/presentation/user/course/widgets/course_view_widget.dart';
 import 'package:cyber_bee/presentation/widgets/custom_title_text.dart';
@@ -10,10 +10,10 @@ class CourseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(
+          padding: EdgeInsets.symmetric(
             horizontal: 15,
           ),
           child: Column(
@@ -21,51 +21,13 @@ class CourseScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               k30Height,
-              const CourseProgressContainerWidget(),
+              CourseProgressContainerWidget(),
               k20Height,
-              const CustomTitleTextWidget(title: 'Course in progress'),
-              const CustomCourseView(),
-              const CustomTitleTextWidget(title: 'My Certificates'),
+              CustomTitleTextWidget(title: 'Course in progress'),
+              CustomCourseView(),
+              CustomTitleTextWidget(title: 'My Certificates'),
               k10Height,
-              Container(
-                decoration: const BoxDecoration(
-                  color: MyColors.secondaryGreyColor,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15),
-                  ),
-                ),
-                padding: const EdgeInsets.all(20),
-                width: double.infinity,
-                height: 150,
-                child: StreamBuilder(
-                    stream: UserDetails.getAllCertificate(),
-                    builder: (context, snapshot) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          if (snapshot.data == null ||
-                              snapshot.data!.docs.isEmpty)
-                            Text(
-                              'No certificates obtained till now',
-                              style: MyTextStyles.h4,
-                            ),
-                          if (snapshot.data == null ||
-                              snapshot.data!.docs.isEmpty)
-                             Align(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                'For Getting certificate compelete A course',
-                                style: MyTextStyles.h4,
-                              ),
-                            ),
-                          if (snapshot.data != null &&
-                              snapshot.data!.docs.isNotEmpty)
-                            Container(),
-                        ],
-                      );
-                    }),
-              ),
+              CertificatePart(),
             ],
           ),
         ),
