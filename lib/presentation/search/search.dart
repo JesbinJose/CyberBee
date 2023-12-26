@@ -24,7 +24,9 @@ class Search extends SearchDelegate<String> {
   List<Widget>? buildActions(BuildContext context) {
     return [
       IconButton(
-        onPressed: () => query == '',
+        onPressed: () {
+          query='';
+        },
         icon: const FaIcon(FontAwesomeIcons.xmark),
       ),
     ];
@@ -53,7 +55,14 @@ class Search extends SearchDelegate<String> {
             result.add(e);
           }
         }
-        if (result.isEmpty) return Center(child: Text('There is no course containing $query',style: MyTextStyles.h3,),);
+        if (result.isEmpty) {
+          return Center(
+            child: Text(
+              'There is no course containing $query',
+              style: MyTextStyles.h3,
+            ),
+          );
+        }
         return ListView.builder(
           itemCount: result.length,
           itemBuilder: (BuildContext context, int index) {
@@ -102,7 +111,14 @@ class Search extends SearchDelegate<String> {
           }
         }
         result = result.toSet().toList();
-        if (result.isEmpty) return Center(child: Text('There is no course containing $query',style: MyTextStyles.h3,),);
+        if (result.isEmpty) {
+          return Center(
+            child: Text(
+              'There is no course containing $query',
+              style: MyTextStyles.h3,
+            ),
+          );
+        }
         return ListView.builder(
           itemCount: result.length,
           itemBuilder: (BuildContext context, int index) {

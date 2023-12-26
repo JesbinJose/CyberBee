@@ -3,7 +3,6 @@ import 'package:cyber_bee/constants/widgets.dart';
 import 'package:cyber_bee/core/firebase/user_details/firebase_functions.dart';
 import 'package:cyber_bee/presentation/widgets/async_textformfield.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class UsernameCheckTextField extends StatelessWidget {
   const UsernameCheckTextField({

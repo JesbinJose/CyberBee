@@ -52,16 +52,19 @@ class ShowPricingPart extends StatelessWidget {
             ),
             k10Width,
             MyCustomSmallButton(
-              function: () {
+              function: () async {
                 controller.pause();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CourseAllPartScreen(
-                      course: course,
+                await UserDetails.enrollCourse(course.reference, context)
+                    .then((value) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CourseAllPartScreen(
+                        course: course,
+                      ),
                     ),
-                  ),
-                );
+                  );
+                });
               },
               content: 'Enroll Now',
             ),

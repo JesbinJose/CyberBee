@@ -1,4 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cyber_bee/presentation/widgets/show_snakbar.dart';
+import 'package:flutter/material.dart';
 
 class UserDetails {
   static String userId = '';
@@ -15,7 +19,7 @@ class UserDetails {
   }
 
   static Future<double> getProgress() async {
-    return ((await _user.get()).data()!['notification'] as List).length /
+    return ((await _user.get()).data()!['courses'] as List).length /
         (await _instance.collection('courses').get()).docs.length;
   }
 
@@ -35,10 +39,15 @@ class UserDetails {
     return (await _user.get()).data()!['courses'] as List;
   }
 
-  static Future enrollCourse(DocumentReference course) async {
-    await _user.update({
-      'courses': FieldValue.arrayUnion([course]),
-    });
+  static Future enrollCourse(
+      DocumentReference course, BuildContext context) async {
+    try {
+      await _user.update({
+        'courses': FieldValue.arrayUnion([course]),
+      });
+    } catch (e) {
+      mySnakbar(context, e.toString());
+    }
   }
 
   static Future<List> getAllNotifications() async {
