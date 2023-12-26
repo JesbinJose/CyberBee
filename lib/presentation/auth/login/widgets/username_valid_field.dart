@@ -1,7 +1,4 @@
-
-import 'package:cyber_bee/constants/widgets.dart';
-import 'package:cyber_bee/core/firebase/user_details/firebase_functions.dart';
-import 'package:cyber_bee/presentation/widgets/async_textformfield.dart';
+import 'package:cyber_bee/presentation/admin/course/widgets/custom_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
 
 class UsernameCheckTextField extends StatelessWidget {
@@ -14,27 +11,13 @@ class UsernameCheckTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AsyncTextFormField(
-      isNumberAllowed: false,
-      valueIsEmptyMessage: "Please enter username",
-      isValidatingMessage: "Checking for the username",
-      valueIsInvalidMessage: "Username is Not registered",
-      validator: (value) async {
-        if (!await FirebaseAuthFunctions.isUserNameAlreadyPresent(
-          value,
-        )) {
-          return false;
-        }
-        return true;
+    return CustomTextFormField(
+      hintText: 'User name',
+      validator: (value) {
+        if (value == null || value.isEmpty) return 'UserName is required';
+        return null;
       },
-      validationDebounce: const Duration(
-        seconds: 2,
-      ),
       controller: _userNameController,
-      decoration: myFormFieldInputDecoration(
-        icon: CupertinoIcons.phone,
-        hintText: 'Username',
-      ),
     );
   }
 }

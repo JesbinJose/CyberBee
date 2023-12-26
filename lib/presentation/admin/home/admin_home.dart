@@ -16,7 +16,6 @@ class AdminHomeScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           height: double.infinity,
           child: SingleChildScrollView(
-            physics: const NeverScrollableScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

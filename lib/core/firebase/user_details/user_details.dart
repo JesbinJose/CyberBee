@@ -64,6 +64,7 @@ class UserDetails {
   static deleteUserData() async {
     try {
       await user.delete();
+      await _instance.collection('usernames').doc(userId).delete();
       final data = await _instance
           .collection('chat')
           .doc('toAdmin')

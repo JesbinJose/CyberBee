@@ -28,12 +28,18 @@ class LevelDetailsGettingDialoge extends StatelessWidget {
       ),
       children: [
         CustomTextFormField(
-          courseName: levelName,
+          controller: levelName,
+          validator: (v) {
+            if (v == null || v.isEmpty) return 'Level name is required';
+          },
           hintText: 'Level Name',
         ),
         k20Height,
         CustomTextFormField(
-          courseName: levelNo,
+          controller: levelNo,
+          validator: (v) {
+            if (v == null || v.isEmpty) return 'Level number is required';
+          },
           hintText: 'Level Number',
         ),
         k20Height,

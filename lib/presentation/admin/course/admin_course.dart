@@ -14,7 +14,6 @@ class AdminCourseScreen extends StatelessWidget {
           height: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: const SingleChildScrollView(
-            physics: NeverScrollableScrollPhysics(),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,

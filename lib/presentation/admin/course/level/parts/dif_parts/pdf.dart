@@ -13,7 +13,14 @@ class PartPdfAddWidget extends StatelessWidget {
     return Column(
       children: [
         CustomTextFormField(
-          courseName: _pdf,
+          controller: _pdf,
+          validator: (v) {
+            if (v == null || v.isEmpty) {
+              return 'Pdf link is required';
+            } else if (!v.contains('docs.google.com/document')) {
+              return 'Need a valid url';
+            }
+          },
           hintText: 'Pdf Link',
         ),
         k30Height,

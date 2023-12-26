@@ -1,6 +1,8 @@
 import 'package:cyber_bee/application/profile/pick_image.dart';
 import 'package:cyber_bee/constants/constants.dart';
+import 'package:cyber_bee/constants/regex.dart';
 import 'package:cyber_bee/core/firebase/events/events.dart';
+import 'package:cyber_bee/presentation/admin/course/widgets/custom_text_form_field.dart';
 import 'package:cyber_bee/presentation/admin/home/widgets/coustom_button.dart';
 import 'package:cyber_bee/presentation/admin/home/widgets/coustom_image_preview.dart';
 import 'package:cyber_bee/presentation/widgets/show_snakbar.dart';
@@ -14,13 +16,12 @@ class AddEventScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InputBorder? decoration = myFormFieldInputDecoration(
-      icon: Icons.abc,
-      hintText: '',
-    ).enabledBorder;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Event',style: MyTextStyles.h4,),
+        title: Text(
+          'Event',
+          style: MyTextStyles.h4,
+        ),
       ),
       body: Center(
         child: Column(
@@ -30,15 +31,16 @@ class AddEventScreen extends StatelessWidget {
             k30Height,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: TextField(
+              child: CustomTextFormField(
                 controller: _link,
-                style: MyTextStyles.h5,
-                decoration: InputDecoration(
-                  hintText: 'Link to the event',
-                  hintStyle: MyTextStyles.h5,
-                  focusedBorder: decoration,
-                  enabledBorder: decoration,
-                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Event link is important';
+                  } else if (!RegExp(validUrl).hasMatch(value)) {
+                    return 'Not Valid Url';
+                  }
+                  return null;
+                }, hintText: 'Event url',
               ),
             ),
             k30Height,

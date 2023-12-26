@@ -34,18 +34,25 @@ class AddPartToLevelInputScreen extends StatelessWidget {
             child: Column(
               children: [
                 CustomTextFormField(
-                  courseName: _partName,
-                  hintText: 'Enter the name of the part',
+                  controller: _partName,
+                  hintText: 'Enter the name of the part',validator: (v){
+                    if(v==null||v.isEmpty)return 'Part Name is required';
+                  },
                 ),
                 k20Height,
                 CustomTextFormField(
-                  courseName: _partNo,
-                  hintText: 'Enter the Number in order of the part',
+                  controller: _partNo,
+                  isNumOnly: true,
+                  hintText: 'Enter the Number in order of the part',validator: (v){
+                    if(v==null||v.isEmpty)return 'Part number is required';
+                  },
                 ),
                 k20Height,
                 CustomTextFormField(
-                  courseName: _description,
-                  hintText: 'Description',
+                  controller: _description,
+                  hintText: 'Description',validator: (v){
+                    if(v==null||v.isEmpty)return 'Description is required';
+                  },
                 ),
                 k20Height,
                 DropdownMenu(

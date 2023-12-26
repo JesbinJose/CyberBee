@@ -28,13 +28,49 @@ class UserAccountSettingsScreen extends StatelessWidget {
               'Delete my details',
               style: MyTextStyles.h4,
             ),
-            onTap: () async {
-              Navigator.popUntil(context, (route) => route.isFirst);
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => LoginScreen()),
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) => SimpleDialog(
+                  title: const Text('Delete Data'),
+                  alignment: Alignment.centerLeft,
+                  children: [
+                    Column(
+                      children: [
+                        const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 20),
+                            child: Text(
+                              'Do you want your all data,\nIt is not recoverable',
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                              onPressed: () async{
+                                Navigator.popUntil(context, (route) => route.isFirst);
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                                );
+                                await UserDetails.deleteUserData();
+                              },
+                              child: const Text('Delete'),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('No'),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               );
-              await UserDetails.deleteUserData();
             },
             trailing: const Icon(Icons.arrow_forward_ios),
           ),
