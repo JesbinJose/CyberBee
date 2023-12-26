@@ -1,4 +1,3 @@
-
 import 'package:cyber_bee/constants/constants.dart';
 import 'package:cyber_bee/core/firebase/user_details/user_details.dart';
 import 'package:cyber_bee/core/starter_controls/starter_controller.dart';
@@ -51,9 +50,7 @@ class SettingOptions extends StatelessWidget {
                       screens: const [
                         AdminHomeScreen(),
                         AdminCourseScreen(),
-                        ProfileScreen(
-                          isInAdminPanel: true,
-                        ),
+                        ProfileScreen(isInAdminPanel: true),
                       ],
                     ),
                   );

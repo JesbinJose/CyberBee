@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cyber_bee/presentation/widgets/show_snakbar.dart';
 import 'package:flutter/material.dart';
@@ -7,42 +9,42 @@ import 'package:flutter/material.dart';
 class UserDetails {
   static String userId = '';
   static final FirebaseFirestore _instance = FirebaseFirestore.instance;
-  static final DocumentReference<Map<String, dynamic>> _user =
+  static DocumentReference<Map<String, dynamic>> user =
       _instance.collection('users').doc(userId);
 
   static Future<String> getUsername() async {
-    return (await _user.get()).data()?['username'] ?? '';
+    return (await user.get()).data()?['username'] ?? '';
   }
 
   static Future<bool> isadmin() async {
-    return (await _user.get()).data()?['isAdmin'] ?? false;
+    return (await user.get()).data()?['isAdmin'] ?? false;
   }
 
   static Future<double> getProgress() async {
-    return ((await _user.get()).data()!['courses'] as List).length /
+    return ((await user.get()).data()!['courses'] as List).length /
         (await _instance.collection('courses').get()).docs.length;
   }
 
   static Stream<QuerySnapshot> getAllCertificate() {
-    return _user.collection("certificates").snapshots();
+    return user.collection("certificates").snapshots();
   }
 
   static Future<void> addProfilePic(String path) async {
-    _user.update({'profile_pic': path});
+    user.update({'profile_pic': path});
   }
 
   static Future<String> getProfilePicLink() async {
-    return (await _user.get()).data()!['profile_pic'];
+    return (await user.get()).data()!['profile_pic'];
   }
 
   static Future<List> getCoursesInprogress(String userId) async {
-    return (await _user.get()).data()!['courses'] as List;
+    return (await user.get()).data()!['courses'] as List;
   }
 
   static Future enrollCourse(
       DocumentReference course, BuildContext context) async {
     try {
-      await _user.update({
+      await user.update({
         'courses': FieldValue.arrayUnion([course]),
       });
     } catch (e) {
@@ -51,11 +53,27 @@ class UserDetails {
   }
 
   static Future<List> getAllNotifications() async {
-    return (await _user.get()).data()!['notification'] as List;
+    return (await user.get()).data()!['notification'] as List;
   }
 
   static Future<void> deleteNotification(final i) async {
-    var up = ((await _user.get()).data()!['notification'] as List).removeAt(i);
-    await _user.update({'notification': up});
+    var up = ((await user.get()).data()!['notification'] as List).removeAt(i);
+    await user.update({'notification': up});
+  }
+
+  static deleteUserData() async {
+    try {
+      await user.delete();
+      final data = await _instance
+          .collection('chat')
+          .doc('toAdmin')
+          .collection(userId)
+          .get();
+      for (var e in data.docs) {
+        await e.reference.delete();
+      }
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }
