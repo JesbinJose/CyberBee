@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Cyber Bee',
       theme: ThemeData(
         scaffoldBackgroundColor: MyColors.backgroundBlackColor,
         iconTheme: const IconThemeData(
