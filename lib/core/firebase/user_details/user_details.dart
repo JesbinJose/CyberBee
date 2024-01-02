@@ -38,7 +38,18 @@ class UserDetails {
   }
 
   static Future<List> getCoursesInprogress(String userId) async {
-    return (await user.get()).data()!['courses'] as List;
+    List result = [];
+    final List data = (await user.get()).data()!['courses'] as List;
+    for (var ref in data as List<DocumentReference>) {
+      final doc = await ref.get();
+      if (doc.exists) {
+        result.add(doc);
+      }
+    }
+    if (result.length != data.length) {
+      user.update({'courses': result});
+    }
+    return result;
   }
 
   static Future enrollCourse(

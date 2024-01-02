@@ -32,8 +32,8 @@ class CustomCourseView extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 final DocumentReference docs = snapshot.data![index];
-                return FutureBuilder<DocumentSnapshot>(
-                  future: docs.get(),
+                return FutureBuilder(
+                  future: getData(docs),
                   builder: (context, s) {
                     if (s.data == null) return const SizedBox();
                     return SingleCourseTile(
@@ -61,5 +61,14 @@ class CustomCourseView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<DocumentSnapshot<Object?>?> getData(DocumentReference<Object?> docs) async {
+    try {
+      final data = await docs.get();
+      return data;
+    } catch (_) {
+      return null;
+    }
   }
 }
