@@ -9,10 +9,12 @@ class SendMessageButton extends StatelessWidget {
     required this.toUserId,
     required this.message,
     required this.fromUserId,
+    required this.scroll,
   });
   final String toUserId;
   final TextEditingController message;
   final String fromUserId;
+  final ScrollController scroll;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,12 @@ class SendMessageButton extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       child: InkWell(
-        onTap: () {
+        onTap: () async{
+          scroll.animateTo(
+            0,
+            duration: const Duration(seconds: 1),
+            curve: Curves.linear,
+          );
           if (message.text.isNotEmpty) {
             final Message message = Message(
               touserId: toUserId,

@@ -1,4 +1,3 @@
-
 import 'package:cyber_bee/presentation/chat/widgets/send_message_button.dart';
 import 'package:flutter/material.dart';
 
@@ -8,11 +7,12 @@ class MessageEditPartChatScreen extends StatelessWidget {
   const MessageEditPartChatScreen({
     super.key,
     required this.message,
-    required this.userId,
+    required this.userId, required this.scroll,
   });
 
   final TextEditingController message;
   final String userId;
+  final ScrollController scroll;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +59,7 @@ class MessageEditPartChatScreen extends StatelessWidget {
               toUserId: 'Admin',
               message: message,
               fromUserId: userId,
+              scroll:scroll
             ),
           ],
         ),

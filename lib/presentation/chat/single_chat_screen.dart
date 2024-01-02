@@ -16,6 +16,7 @@ class SingleChatScreen extends StatelessWidget {
   final String userId;
   final String userName;
   final TextEditingController message = TextEditingController();
+  final ScrollController scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,33 +28,43 @@ class SingleChatScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          SizedBox(
-            height: double.infinity,
-            width: double.infinity,
-            child: StreamBuilder(
-              stream: ChatControls().getMessages(userId),
-              builder: (context, snapshot) {
-                if (snapshot.data != null && snapshot.data!.docs.isNotEmpty) {
-                  return ListView.separated(
-                    itemBuilder: (context, index) {
-                      final Message message = Message.fromMap(
-                        snapshot.data!.docs[index],
-                      );
-                      final bool isuser = message.touserId == 'true';
-                      return SingleMessageTile(
-                        isuser: isuser,
-                        message: message,
-                      );
-                    },
-                    separatorBuilder: (context, index) => k10Height,
-                    itemCount: snapshot.data!.docs.length,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 90),
+            child: SizedBox(
+              height: MediaQuery.sizeOf(context).height,
+              width: MediaQuery.sizeOf(context).width,
+              child: StreamBuilder(
+                stream: ChatControls().getMessages(userId),
+                builder: (context, snapshot) {
+                  if (snapshot.data != null && snapshot.data!.docs.isNotEmpty) {
+                    final List data = snapshot.data!.docs.reversed.toList();
+                    return ListView.separated(
+                      reverse: true,
+                      itemBuilder: (context, index) {
+                        final Message message = Message.fromMap(
+                          data[index],
+                        );
+                        final bool isuser = message.touserId == 'true';
+                        return SingleMessageTile(
+                          isuser: isuser,
+                          message: message,
+                        );
+                      },
+                      separatorBuilder: (context, index) => k10Height,
+                      itemCount: data.length,
+                    );
+                  }
+                  return const Center(
+                    child: Text(
+                      'Send a Chat',
+                    ),
                   );
-                }
-                return const SizedBox();
-              },
+                },
+              ),
             ),
           ),
           MessageEditPartChatScreen(
+            scroll: scrollController,
             message: message,
             userId: userId,
           ),
