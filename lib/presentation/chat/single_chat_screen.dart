@@ -1,8 +1,10 @@
+import 'package:cyber_bee/application/function/date_time.dart';
 import 'package:cyber_bee/constants/widgets.dart';
 import 'package:cyber_bee/core/firebase/chat/chat.dart';
 import 'package:cyber_bee/core/firebase/chat/chat_models.dart';
 import 'package:cyber_bee/presentation/chat/widgets/message_edit.dart';
 import 'package:cyber_bee/presentation/chat/widgets/message_tile.dart';
+import 'package:cyber_bee/presentation/chat/widgets/single_date_tile.dart';
 import 'package:flutter/material.dart';
 
 class SingleChatScreen extends StatelessWidget {
@@ -37,22 +39,39 @@ class SingleChatScreen extends StatelessWidget {
                 stream: ChatControls().getMessages(userId),
                 builder: (context, snapshot) {
                   if (snapshot.data != null && snapshot.data!.docs.isNotEmpty) {
-                    final List data = snapshot.data!.docs.reversed.toList();
+                    final List messages = snapshot.data!.docs.reversed.toList();
                     return ListView.separated(
                       controller: scrollController,
                       reverse: true,
                       itemBuilder: (context, index) {
                         final Message message = Message.fromMap(
-                          data[index],
+                          messages[index],
                         );
-                        final bool isuser = message.touserId == 'true';
-                        return SingleMessageTile(
-                          isuser: isuser,
-                          message: message,
+                        String? date;
+                        if (index > 0) {
+                          date = getDate(
+                            message.dateAndTime,
+                            Message.fromMap(
+                              messages[index - 1],
+                            ).dateAndTime,
+                            index == messages.length - 1,
+                          );
+                        }
+                        return Column(
+                          children: [
+                            if (date != null && index == messages.length - 1)
+                              MessageDateTile(date: date),
+                            SingleMessageTile(
+                              isuser: message.touserId == 'true',
+                              message: message,
+                            ),
+                            if (date != null && index != messages.length - 1)
+                              MessageDateTile(date: date),
+                          ],
                         );
                       },
                       separatorBuilder: (context, index) => k10Height,
-                      itemCount: data.length,
+                      itemCount: messages.length,
                     );
                   }
                   return const Center(
