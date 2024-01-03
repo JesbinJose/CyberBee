@@ -39,6 +39,7 @@ class SingleChatScreen extends StatelessWidget {
                   if (snapshot.data != null && snapshot.data!.docs.isNotEmpty) {
                     final List data = snapshot.data!.docs.reversed.toList();
                     return ListView.separated(
+                      controller: scrollController,
                       reverse: true,
                       itemBuilder: (context, index) {
                         final Message message = Message.fromMap(

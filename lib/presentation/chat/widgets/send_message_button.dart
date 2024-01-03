@@ -25,11 +25,17 @@ class SendMessageButton extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       child: InkWell(
-        onTap: () async{
-          scroll.animateTo(
-            0,
-            duration: const Duration(seconds: 1),
-            curve: Curves.linear,
+        onTap: () async {
+          WidgetsBinding.instance.addPostFrameCallback(
+            (_) {
+              scroll.animateTo(
+                0.0, // Scroll to offset 0
+                duration: const Duration(
+                  milliseconds: 300,
+                ), // Adjust duration as needed
+                curve: Curves.easeInOut, // Use a smooth animation curve
+              );
+            },
           );
           if (message.text.isNotEmpty) {
             final Message message = Message(
